@@ -1,0 +1,17 @@
+# Ofir Nadav
+
+Those libraries in here because I made changes in the css/js files
+
+# angular-tree-control
+
+Made changes in js file lines 289-300.
+Edit the directive template.
+Edit the whole css file, convert him to scss and created a minify version.
+
+# ng-tags-input
+Made change in js file line 373.
+Add $timeout to fix the 'enter' bug.
+
+# route-to-component
+JS file that expand ui-rauter.
+Add a method to $stateProvider that can work with angular 1.5 components.

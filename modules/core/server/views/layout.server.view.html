@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <base href="/">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <meta name="fragment" content="!">
+
+  <!-- Apple META -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Facebook META -->
+  <meta property="fb:app_id" content="{{facebookAppId}}">
+  <meta property="og:site_name" content="{{title}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{url}}">
+  <meta property="og:image" content="{{logo}}">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter META -->
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:url" content="{{url}}">
+  <meta name="twitter:image" content="{{logo}}">
+
+  <!-- Fav Icon -->
+  <link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
+
+  <!-- Application CSS Files -->
+  {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
+  <!--<link href="modules/core/client/css/core.css" rel="stylesheet">-->
+
+</head>
+
+<body class="ng-cloak">
+  <header class="navbar top-navbar navbar-fixed-top">
+    <header-component ></header-component>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <!--<footer-component></footer-component>-->
+  </footer>
+
+  <!--Embedding The User Object-->
+  <script type="text/javascript">
+      var user = {{ user | json | safe }};
+  </script>
+
+  <!--Load The Socket.io File-->
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+  <!--Application JavaScript Files-->
+  {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
+
+  {% if livereload %}
+  <!--Livereload script rendered -->
+  <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
+  {% endif %}
+
+
+  <!--Facebook share button script -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=1823130261247531";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+</body>
+
+</html>

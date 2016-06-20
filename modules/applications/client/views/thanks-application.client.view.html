@@ -1,0 +1,18 @@
+<section class="application-section">
+  <div class="main-header">
+    <h1>Thank You <i class="fa fa-check-circle fa-2x"></i></h1>
+  </div>
+  <div>
+    <h2>Thank You for your application to {{vm.makeathon.name}}</h2>
+  </div>
+  <div class="row">
+    <a class="btn btn-tom" ui-sref="home">
+      <span><i class="glyphicon glyphicon-circle-arrow-left"></i> Home </span></a>
+
+    <a class="btn btn-tom" data-ui-sref="applications.view({ applicationId: vm.application._id })"> View Application </a>
+  </div>
+  <!--Facebook share button -->
+  <div class="fb-share-button" data-href="http://mms.tomglobal.org/applications/{{vm.application._id}}/thanks" data-layout="button" data-mobile-iframe="true"></div>
+  <div class="fb-share-button" data-href="http://mms.tomglobal.org/applications/{{vm.application._id}}/thanks" data-layout="link" data-mobile-iframe="true"></div>
+</section>
+

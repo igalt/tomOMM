@@ -1,0 +1,25 @@
+<section class="checklist-section">
+  <div class="checklist">
+    <h1>{{vm.checklist.header}} Checklist</h1>
+    <div  class="checklist-labels">
+      <label ng-repeat="label in vm.checklist.labels">
+        <input type="checkbox" checklist-model="vm.checklist.model.labels" checklist-value="label.text"> {{label.text}}
+      </label>
+    </div>
+    <div class="button-group">
+      <button type="button" class="btn btn-primary" ng-click="vm.checkAll()">Check All</button>
+      <button type="button" class="btn btn-primary" ng-click="vm.uncheckAll()">Uncheck All</button>
+    </div>
+    <div ng-show="vm.checklist.completed" class="text-center text-success">
+      <strong>{{vm.checklist.header}} Completed</strong>
+    </div>
+    <div class="forms-link" ng-if="vm.checklist.header === 'Calls & Screening'">
+      <a data-ui-sref="applications.list({ makeathonId: vm.makeathon._id })">View Applications</a>
+      <span> | </span>
+      <a data-ui-sref="challenges.list({ makeathonId: vm.makeathon._id })">View Challenges</a>
+    </div>
+  </div>
+</section>
+
+
+

@@ -1,0 +1,325 @@
+<section class="makeathon-section" ng-class="{'normal-mode': !vm.manageMode}">
+  <div class="main-header" ng-if="!vm.manageMode">
+    <h2>{{vm.makeathon.name}}</h2>
+    <a class="logo-img" ui-sref="home" rel="home">
+      <img src="modules/core/client/img/brand/tom-logo.png"
+           alt="TOM MMS" class="logo-img-primary"/>
+    </a>
+  </div>
+
+  <div>
+    <div class="homeBtn">
+      <a class="btn btn-tom" ui-sref="makeathons.list">
+        <span><i class="glyphicon glyphicon-circle-arrow-left"></i> All Makeathons </span>
+      </a>
+    </div>
+
+    <form id="makeathonForm" name="vm.form.makeathonForm" ng-submit="vm.save(vm.form.makeathonForm.$valid)" class="form-horizontal" novalidate>
+      <fieldset ng-disabled="!vm.makeathonFormEditable" class="fieldset-container">
+        <div class="form-group">
+          <H4 ng-if="vm.makeathonFormEditable">All fields are required<span class="asterisk"> * </span></H4>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="name">Makeathon Name <span class="asterisk" ng-if="vm.makeathonFormEditable" > * </span></label>
+          <input type="text" id="name" class="form-control" placeholder="Makeathon Name"
+                 oninvalid="setCustomValidity('Makeathon name is required')"
+                 name="name" ng-model="vm.makeathon.name" required>
+          <div ng-messages="vm.form.makeathonForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Makeathon name is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="status">Status<span class="asterisk" ng-if="vm.makeathonFormEditable"> * </span></label>
+          <select type="text" id="status" class="form-control" name="status"
+                  oninvalid="setCustomValidity('Status is required')"
+                  ng-model="vm.makeathon.status" required>
+            <option value="pending">Pending approval</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="step2">Step II finished</option>
+            <option value="step3-6">Step III - VI finished</option>
+            <option value="pretom">PreTOM finished</option>
+            <option value="finished">Event finished</option>
+          </select>
+          <div ng-messages="vm.form.makeathonForm.status.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Status is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="venue">Venue<span class="asterisk" ng-if="vm.makeathonFormEditable"> * </span></label>
+          <input type="text" class="form-control" id="venue" name="venue"
+                 oninvalid="setCustomValidity('Venue is required')"
+                 placeholder="Venue" ng-model="vm.makeathon.venue" required>
+
+          <div ng-messages="vm.form.makeathonForm.venue.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Venue is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="startDate">Makeathon Start Date<span class="asterisk" ng-if="vm.makeathonFormEditable"> * </span></label>
+          <div class="input-datepicker">
+            <input type="text" class="form-control datepicker" id="startDate"
+                   name="startDate"
+                   placeholder="Event start date" ng-model="vm.makeathon.startDate" required>
+          </div>
+          <div ng-messages="vm.form.makeathonForm.startDate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Makeathon start date is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="endDate">Makeathon End Date<span class="asterisk" ng-if="vm.makeathonFormEditable"> * </span></label>
+          <div class="input-datepicker">
+            <input type="text" class="form-control datepicker" id="endDate"
+                   name="endDate" placeholder="Event end date"
+                   ng-model="vm.makeathon.endDate" required>
+          </div>
+          <div ng-messages="vm.form.makeathonForm.endDate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Makeathon end date is required.</p>
+          </div>
+        </div>
+
+
+        <div class="form-group" show-errors>
+          <label for="preTomDate">pre-TOM Date<span class="asterisk" ng-if="vm.makeathonFormEditable"> * </span></label>
+          <div class="input-datepicker">
+            <input type="text" class="form-control datepicker" id="preTomDate"
+                   value="{{vm.makeathon.preTomDate | date:'dd/MM/yyyy'}}" name="preTomDate"
+                   popover="{{vm.preTomPopMsg}}" popover-trigger="focus"
+                   placeholder="Pre Tom Date" ng-model="vm.makeathon.preTomDate" required>
+          </div>
+          <div ng-messages="vm.form.makeathonForm.preTomDate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">pre-TOM date is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="regDeadline">Registration Deadline
+            <span class="asterisk" ng-if="vm.makeathonFormEditable"> * </span></label>
+          <div class="input-datepicker">
+            <input type="text" class="form-control datepicker" id="regDeadline"
+                   value="{{vm.makeathon.regDeadline | date:'dd/MM/yyyy'}}" name="regDeadline"
+                   popover="{{vm.regDeadlinePopMsg}}" popover-trigger="focus"
+                   placeholder="Registration deadline" ng-model="vm.makeathon.regDeadline" required>
+          </div>
+          <div ng-messages="vm.form.makeathonForm.regDeadline.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Registration Deadline is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="website">Website</label>
+          <input type="text" class="form-control" id="website"
+                 placeholder="Website" ng-model="vm.makeathon.website">
+        </div>
+
+        <div class="form-group" ng-if="!vm.makeathonFormEditable || vm.makeathon.partners.length">
+          <label>Partners Logo</label>
+          <br />
+          <div class="partners-logo-view">
+            <div class="align-left" ng-repeat="partner in vm.makeathon.partners">
+              <a ng-href={{partner}} target="_blank">
+                <img class="partners-img" ng-src={{partner}} alt="partners"/>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="vm.makeathonFormEditable">
+          <label for="inputFile">Partner Logos</label>
+          <br />
+
+          <div class="btn btn-tom btn-file">
+            Upload Files
+            <input id="inputFile" type="file" nv-file-select uploader="vm.uploader" multiple/>
+          </div>
+
+          <div class="" ng-if="vm.uploaderQueue.length">
+
+            <h3>Upload queue</h3>
+            <p>Queue length: {{ vm.uploaderQueue.length }}</p>
+
+            <table class="table">
+              <thead>
+              <tr>
+                <th width="50%">Name</th>
+                <th ng-if="vm.uploader.isHTML5">Size</th>
+                <!--<th ng-if="vm.uploader.isHTML5">Progress</th>-->
+                <!--<th>Status</th>-->
+                <!--<th>Actions</th>-->
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="item in vm.uploaderQueue">
+                <td><strong>{{ item.file.name }}</strong></td>
+                <td ng-if="vm.uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                <!--<td ng-if="vm.uploader.isHTML5">-->
+                <!--<div class="progress" style="margin-bottom: 0;">-->
+                <!--<div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>-->
+                <!--</div>-->
+                <!--</td>-->
+                <!--<td class="text-center">-->
+                <!--<span ng-if="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>-->
+                <!--<span ng-if="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>-->
+                <!--<span ng-if="item.isError"><i class="glyphicon glyphicon-remove"></i></span>-->
+                <!--</td>-->
+                <td nowrap>
+                  <!--<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">-->
+                  <!--<span class="glyphicon glyphicon-upload"></span> Upload-->
+                  <!--</button>-->
+                  <!--<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">-->
+                  <!--<span class="glyphicon glyphicon-ban-circle"></span> Cancel-->
+                  <!--</button>-->
+                  <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="item.remove()">
+                    <span class="glyphicon glyphicon-trash"></span> Remove
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div>
+              <!--<div>-->
+              <!--Queue progress:-->
+              <!--<div class="progress" style="">-->
+              <!--<div class="progress-bar" role="progressbar" ng-style="{ 'width': vm.uploader.progress + '%' }"></div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<button type="button" class="btn btn-success btn-s" ng-click="vm.uploader.uploadAll()" ng-disabled="!vm.uploader.getNotUploadedItems().length">-->
+              <!--<span class="glyphicon glyphicon-upload"></span> Upload all-->
+              <!--</button>-->
+              <!--<button type="button" class="btn btn-warning btn-s" ng-click="vm.uploader.cancelAll()" ng-disabled="!vm.uploader.isUploading">-->
+              <!--<span class="glyphicon glyphicon-ban-circle"></span> Cancel all-->
+              <!--</button>-->
+              <button type="button" class="btn btn-danger btn-s" ng-click="vm.uploader.clearQueue()" ng-disabled="!vm.uploaderQueue.length">
+                <span class="glyphicon glyphicon-trash"></span> Remove all
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group rich-editor" show-errors>
+          <label for="applicationDesc">Application description
+            <span class="asterisk" ng-if="vm.makeathonFormEditable"> * </span></label>
+          <p ng-if="vm.makeathonFormEditable">
+            This paragraph will be shown on the application form
+            and is supposed to give details about the Makeathon.<br />
+          </p>
+
+          <!--<wysiwyg-edit id="applicationDesc" content="vm.appRichTextPlaceholder"-->
+          <!--econfig="vm.editorConfig"-->
+          <!--oninvalid="setCustomValidity('Application description is required')"-->
+          <!--ng-if="vm.makeathonFormEditable">-->
+          <!--</wysiwyg-edit>-->
+          <text-angular id="applicationDesc" ng-model="vm.makeathon.applicationDesc" ng-if="vm.makeathonFormEditable"
+                        placeholder="We are proud to present..."></text-angular>
+          <input type="hidden" name="applicationDesc" ng-model="vm.makeathon.applicationDesc" required/>
+
+          <p style="border: 1px solid black; padding: 10px;" ng-bind-html="vm.makeathon.applicationDesc | unsafe"
+             ng-if="!vm.makeathonFormEditable"></p>
+
+          <div ng-messages="vm.form.makeathonForm.applicationDesc.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Application description is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group rich-editor" show-errors>
+          <label for="challengeDesc">Challenge description
+            <span class="asterisk" ng-if="vm.makeathonFormEditable"> * </span></label>
+          <p ng-if="vm.makeathonFormEditable">
+            This paragraph will be shown on the call for challenge form
+            and is supposed to give details about the Makeathon.<br />
+
+          </p>
+          <!--<wysiwyg-edit id="challengeDesc" content="vm.challRichTextPlaceholder"-->
+          <!--econfig="vm.editorConfig"-->
+          <!--oninvalid="setCustomValidity('Challenge description is required')"-->
+          <!--ng-if="vm.makeathonFormEditable" required>-->
+          <!--</wysiwyg-edit>-->
+          <text-angular id="challengeDesc" ng-model="vm.makeathon.challengeDesc" ng-if="vm.makeathonFormEditable"
+                        placeholder="We are proud to present..."></text-angular>
+
+          <input type="hidden" name="challengeDesc" ng-model="vm.makeathon.challengeDesc" required/>
+
+          <p style="border: 1px solid black; padding: 10px;" ng-bind-html="vm.makeathon.challengeDesc | unsafe"
+             ng-if="!vm.makeathonFormEditable"></p>
+
+          <div ng-messages="vm.form.makeathonForm.challengeDesc.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Challenge description is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group user-roles">
+          <label>Users</label>
+          <div class="input-group" ng-repeat="user in vm.userRoles track by $index" show-errors>
+            <select ng-model="user.role" ng-disabled="!!$first">
+              <option>Core team</option>
+              <option>Applicant Screeners</option>
+              <option>Challenge screeners</option>
+              <option>Organizing Committee</option>
+              <option>Project coordinator</option>
+              <option>Participant coordinator</option>
+              <option>Other</option>
+            </select>
+            <input type="email" name="userRole-{{$index}}" class=""
+                   ng-disabled="!!$first" placeholder="Enter user email"
+                   ng-model="user.email" lowercase required>
+            <button type="button" class="remove" ng-if="!$first"
+                    ng-show="vm.makeathonFormEditable && vm.userRoles.length > 1"
+                    ng-click="vm.removeUser($index);"><span>-</span>
+            </button>
+
+            <div class="" ng-messages="vm.form.makeathonForm[$index].$error" role="alert" id="userRoles-{{key+1}}">
+              <p class="help-block error-text" ng-message="required">Email address is required.</p>
+              <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+            </div>
+          </div>
+          <br/>
+          <button type="button" class="btn btn-tom addfields" ng-if="vm.makeathonFormEditable"
+                  ng-click="vm.addNewUser();">Add User</button>
+        </div>
+        <div class="form-group" ng-if="vm.makeathonFormEditable">
+          <button type="submit" class="btn btn-tom">{{vm.makeathon._id ? 'Update' : 'Submit'}}</button>
+          <button ui-sref="makeathons.list" type="button" class="btn btn-tom">Cancel
+          </button>
+        </div>
+        <!--<div ng-show="vm.success" class="text-center text-success">-->
+        <!--<strong>Profile Saved Successfully</strong>-->
+        <!--</div>-->
+        <div ng-show="vm.error" class="text-center text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+      <div class="copy-clipboard"  ng-if="vm.makeathon._id">
+        <div class="form-group">
+          <label for="applicationLink">Application link</label>
+          <div class="form-link">
+            <input type="text" class="form-control" id="applicationLink" readonly
+                   value="{{vm.$windowLocation}}/applications/create/{{vm.makeathon._id}}">
+            <button type="button" class="btn btn-default copyBtn" title="Copy to clipboard"
+                    ngclipboard  data-clipboard-target="#applicationLink" alt="copy to clipboard"
+                    ngclipboard-success="vm.copyClipboardSuccess(e)" ngclipboard-error="vm.copyClipboardError(e)">
+              <svg class="octicon octicon-clippy" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M2 12h4v1H2v-1z m5-6H2v1h5v-1z m2 3V7L6 10l3 3V11h5V9H9z m-4.5-1H2v1h2.5v-1zM2 11h2.5v-1H2v1z m9 1h1v2c-0.02 0.28-0.11 0.52-0.3 0.7s-0.42 0.28-0.7 0.3H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h3C4 0.89 4.89 0 6 0s2 0.89 2 2h3c0.55 0 1 0.45 1 1v5h-1V5H1v9h10V12zM2 4h8c0-0.55-0.45-1-1-1h-1c-0.55 0-1-0.45-1-1s-0.45-1-1-1-1 0.45-1 1-0.45 1-1 1h-1c-0.55 0-1 0.45-1 1z"></path></svg>
+            </button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="challengeLink">Challenge link</label>
+          <div class="form-link">
+            <input type="text" class="form-control" id="challengeLink" readonly
+                   value="{{vm.$windowLocation}}/challenges/create/{{vm.makeathon._id}}">
+            <button type="button" class="btn btn-default copyBtn" title="Copy to clipboard"
+                    data-toggle="popover" data-content="Some content" data-placement="top"
+                    ngclipboard data-clipboard-target="#challengeLink" alt="copy to clipboard"
+                    ngclipboard-success="vm.copyClipboardSuccess(e)" ngclipboard-error="vm.copyClipboardError(e)">
+              <svg class="octicon octicon-clippy" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M2 12h4v1H2v-1z m5-6H2v1h5v-1z m2 3V7L6 10l3 3V11h5V9H9z m-4.5-1H2v1h2.5v-1zM2 11h2.5v-1H2v1z m9 1h1v2c-0.02 0.28-0.11 0.52-0.3 0.7s-0.42 0.28-0.7 0.3H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h3C4 0.89 4.89 0 6 0s2 0.89 2 2h3c0.55 0 1 0.45 1 1v5h-1V5H1v9h10V12zM2 4h8c0-0.55-0.45-1-1-1h-1c-0.55 0-1-0.45-1-1s-0.45-1-1-1-1 0.45-1 1-0.45 1-1 1h-1c-0.55 0-1 0.45-1 1z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

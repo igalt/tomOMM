@@ -1,0 +1,171 @@
+.application-section, .challenge-section{
+@extend .normal-mode;
+}
+
+fieldset{
+  margin: 1em 0;
+  padding-bottom: 1em;
+}
+
+h2 {
+  font-family: Open Sans, Arial, sans-serif;
+  color: $color_h2;
+  font-weight: normal;
+  font-size: 25px;
+  text-transform: uppercase;
+  line-height: 1.5em;
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+.rtl{
+  direction: rtl;
+  text-align: justify;
+}
+
+.asterisk{
+  color: $color_asterisk;
+}
+.form-horizontal .form-group{
+  margin: 1em 2em;
+  border: none;
+  .form-control{
+    border-radius: 0;
+  }
+  input{
+    padding-left: 5px;
+    line-height: 28px;
+  }
+  textarea{
+    padding-left: 5px;
+    height: 200px;
+  }
+  select{
+    padding-left: 5px;
+    height: 34px;
+  }
+}
+
+.partners-logo-view{
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  .partners-img{
+    padding-left: 10px;
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
+.pad0{
+  padding: 0;
+}
+
+.btn-tom{
+  border-radius: 0;
+  background: transparent;
+  color: $color_btn_a;
+  border: 1px solid $color_btn_border;
+  display: inline-block;
+  padding: 8px 25px;
+  margin: 0.5em 0;
+  font-weight: bold;
+  text-align: center;
+  transition: background-image 0.3s linear;
+  box-shadow:none;
+  &:hover{
+    background: $color_btn_bg_hover;
+    color: $color_btn_a_hover;
+  }
+}
+
+.tkName{
+  font-size: 2em;
+}
+.fa-check-circle{
+  color: $color_success;
+}
+.jumborder{
+  border: 2px solid $color_jumborder;
+}
+
+//.requiredBox{
+//  -webkit-box-shadow: 0 0 3px 1px rgba(255, 0, 0, 0.6);
+//  -moz-box-shadow: 0 0 3px 1px rgba(255, 0, 0, 0.6);
+//  box-shadow: 0 0 3px 1px rgba(255, 0, 0, 0.6);
+//}
+//.optionalBox{
+//  -webkit-box-shadow: 0 0 3px 1px rgba(255, 113, 0, 0.6);
+//  -moz-box-shadow: 0 0 3px 1px rgba(255, 113, 0, 0.6);
+//  box-shadow: 0 0 3px 1px rgba(255, 113, 0, 0.6);
+//}
+//.successBox{
+//  -webkit-box-shadow: 0 0 3px 1px rgba(0, 128, 0, 0.6);
+//  -moz-box-shadow: 0 0 3px 1px rgba(0, 128, 0, 0.6);
+//  box-shadow: 0 0 3px 1px rgba(0, 128, 0, 0.6);
+//}
+
+tags-input.ng-invalid .tags {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.fieldset-container{
+  background: $color_bg_user_profile;
+  border-radius: 6px;
+}
+.info-Title{
+  padding-top: 0;
+  margin-top: 0;
+}
+.checkboxStyle{
+  margin-right: 0.5em;
+}
+.btns{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.come-as{
+  display: flex;
+  flex-direction: column;
+}
+
+.makeathon-experience{
+  label{
+    margin-right: 20px;
+  }
+}
+
+
+.btn-tom{
+  border-radius: 0;
+  background: transparent;
+  color: $color_btn_a;
+  border: 1px solid $color_btn_border;
+  display: inline-block;
+  padding: 8px 25px;
+  margin: 0.5em 0;
+  font-weight: bold;
+  text-align: center;
+  transition: background-image 0.3s linear;
+  box-shadow:none;
+  &:hover{
+    background: $color_btn_bg_hover;
+    color: $color_btn_a_hover;
+  }
+}
+
+.btns{
+  display: flex;
+  justify-content: space-between;
+}
+

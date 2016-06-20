@@ -1,0 +1,250 @@
+.manage-section{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .main-header {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-main-header-border;
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    img{
+      width: 120px;
+
+    }
+  }
+  .manage-view{
+    width: 60%;
+    display: flex;
+    .sidenav{
+      font-size: 2em;
+      width: 25%;
+      margin: 0 1em;
+    }
+    .makathon-view{
+      width: 70%;
+    }
+  }
+}
+
+.makeathon-section {
+  width: 100%;
+  input:disabled, select:disabled {
+    background: $color-input-readonly;
+  }
+
+  .input-datepicker{
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    .ui-datepicker-trigger{
+      border-radius: 0;
+      background: $color-datepicker-btn;
+      height: 34px;
+      padding-bottom: 5px;
+      margin-bottom: 3px;
+      box-shadow: none;
+    }
+  }
+
+  .partners-logo-view{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    .partners-img{
+      padding-right: 10px;
+      max-width: 150px;
+      max-height: 150px;
+    }
+  }
+
+  .user-roles{
+    .input-group{
+      margin: 5px 0;
+      width: 100%;
+      select{
+        width: 30%;
+      }
+      input{
+        width: 50%;
+        margin: 0 5px;
+      }
+    }
+    .remove{
+      width: 34px;
+      height: 34px;
+      background: $color-bg-remove-btn;
+      color: $color-font-remove-btn;
+      font-weight: bold;
+      font-size: 21px;
+      border: 0;
+      cursor: pointer;
+      display: inline-block;
+      padding: 4px 9px;
+      vertical-align: top;
+      line-height: 100%;
+    }
+    .addfields{
+      margin: 10px 0;
+    }
+  }
+
+  /* Editor styling */
+  .rich-editor{
+    .ta-toolbar {
+      background-color: $color-bg-editor;
+      padding: 10px 10px 5px;
+      margin-left: 0; /* Override bootstrap */
+      border: 1px solid $color-border-editor;
+    }
+    .ta-toolbar .btn-group {
+      margin-bottom: 5px;
+    }
+    .ta-editor, .white-box {
+      padding: 10px;
+      background-color: $color-box-editor;
+      border: 1px solid $color-border-editor;
+    }
+    textarea.ta-bind {
+      width: 100%;
+    }
+    .p-view-mode {
+      border: 1px solid black;
+      padding: 10px;
+      background-color: $color-box-editor;
+    }
+  }
+
+  .copy-clipboard{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+    .form-link {
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      input:read-only {
+        background: $color-input-readonly;
+        cursor: text;
+      }
+      .copyBtn {
+        border-radius: 0;
+        background: $color-input-readonly;
+        height: 34px;
+        padding-bottom: 5px;
+        margin-bottom: 3px;
+        box-shadow: none;
+      }
+    }
+
+  }
+}
+
+.checklist-section {
+  width: 100%;
+  .checklist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .checklist-labels{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 20px 150px;
+    }
+    .button-group{
+      margin: 20px;
+
+    }
+    .forms-link{
+      font-size: 1.3em;
+      margin: 1em 0;
+    }
+  }
+}
+
+.wiki-section{
+  .wiki, .book-page-inner {
+    font-size: 16px;
+  }
+}
+
+.download-section{
+  .download-book{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    img{
+      height: 500px;
+    }
+  }
+}
+
+.contact-section{
+  .contact{
+    font-size: 1.5em;
+    .help{
+      display: flex;
+      img{
+        padding-right: 30px;
+      }
+      .details{
+        display: flex;
+        flex-direction: column;
+        div{
+          margin: 20px 0;
+        }
+      }
+    }
+  }
+}
+
+// Opposite from manage mode
+.normal-mode{
+  width: 50%;
+  margin: 0 auto;
+
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-main-header-border;
+    padding-bottom: 9px;
+    margin: 20px 0;
+    img{
+      width: 120px;
+
+    }
+  }
+}
+
+.upcoming-makeathons{
+  width: 70%;
+  margin: 0 auto;
+
+  .main-header {
+    border-bottom: 1px solid $color-main-header-border;
+    padding-bottom: 9px;
+    margin: 20px 0;
+  }
+  .makeathonRow{
+    cursor: pointer;
+  }
+  .table>tbody>tr>td{
+    vertical-align: middle;
+  }
+}
+
+
+
+
+

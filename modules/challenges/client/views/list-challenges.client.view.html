@@ -1,0 +1,28 @@
+<section class="challenge-section" ng-if="vm.isAllow">
+  <div class="main-header">
+    <h2>Challenges for <span class="uppercase">{{ vm.makeathon.name }}</span></h2>
+  </div>
+  <div class='btns'>
+    <button class="btn btn-tom" ng-click="vm.goBack()">
+      <span><i class="glyphicon glyphicon-circle-arrow-left"></i> Back </span>
+    </button>
+    <button class='btn btn-tom' ng-click="vm.exportToCsv()">Export to Excel</button>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="challenge in vm.challenges"
+       data-ui-sref="challenges.view({ makeathonId: vm.makeathon._id, challengeId: challenge._id })"
+       class="list-group-item">
+      <!--small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="challenge.createdAt | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="challenge.user" data-ng-bind="challenge.user.displayName"></span>
+        <span data-ng-if="!challenge.user">Deleted User</span>
+      </small-->
+      <h4 class="list-group-item-heading" data-ng-bind="challenge.user.displayName"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="!vm.challenges.length">
+    No Challenges yet.
+  </div>
+</section>

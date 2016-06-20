@@ -1,0 +1,227 @@
+<section class="application-section">
+  <div class="main-header">
+    <h2>{{vm.application._id ? vm.application.user.displayName+' ('+vm.application.comeAs+')' : 'New Application'}}</h2>
+    <!--Edit Button-->
+    <!--<div class="col-md-1" style="margin-top: 15px;">-->
+      <!--<a class="btn btn-primary" ng-if="!vm.applicationFormEditable"-->
+         <!--data-ui-sref="applications.edit({applicationId: vm.application._id})">-->
+        <!--<i class="glyphicon glyphicon-edit"> EDIT</i>-->
+      <!--</a>-->
+    <!--</div>-->
+    <a ui-sref="home" rel="home">
+      <img src="modules/core/client/img/brand/tom-logo.png"
+           alt="TOM GLOBAL" class="logo-img-primary"/>
+    </a>
+  </div>
+
+  <div>
+    <div class="homeBtn">
+      <button class="btn btn-tom" ng-click="vm.goBack()">
+        <span><i class="glyphicon glyphicon-circle-arrow-left"></i> Back </span>
+      </button>
+    </div>
+
+    <div class="partners-logo-view">
+      <div class="align-right" ng-repeat="partner in vm.makeathon.partners">
+        <img class="partners-img" src={{partner}} alt="partners"/>
+      </div>
+    </div>
+
+    <div>
+      <h2>{{vm.makeathon.name ? vm.makeathon.name : ' Application form'}}</h2>
+      <p ng-bind-html="vm.makeathon.applicationDesc | unsafe"></p>
+    </div>
+
+    <form id="applicationForm" name="vm.form.applicationForm" class="form-horizontal"
+          ng-submit="vm.save(vm.form.applicationForm.$valid)" novalidate>
+      <fieldset id="editUserProfile" class="fieldset-container"
+                ng-if="vm.applicationFormEditable">
+        <div class="form-group info-Title">
+          <h2>Your Profile</h2>
+          <div>Fields marked with <span class="asterisk"> * </span>are required</div>
+        </div>
+        <edit-profile-component></edit-profile-component>
+      </fieldset>
+
+      <fieldset class="fieldset-container" ng-disabled="!vm.applicationFormEditable">
+        <div class=" form-group info-Title">
+          <h2>The questions below will help us get to know you a little.</h2>
+          <div ng-if="vm.applicationFormEditable">Fields marked with <span class="asterisk"> * </span>are required</div>
+        </div>
+
+        <div class="form-group come-as" show-errors>
+          <strong>
+            I am coming to the Makeathon as a: [multiple choices
+            allowed]<span class="asterisk" ng-if="vm.applicationFormEditable"> * </span>
+          </strong>
+          <p>
+            This is a meeting point
+            for people from various backgrounds. The two main groups are:<br/>
+            <strong>Makers: </strong>engineers, developers, designers and
+            hobbyists that have the capacity to create physical and software
+            articles.<br/>
+            <strong>Need-Knowers: </strong>people that have an intimate
+            understanding of the challenges faced by people with disabilities.
+            In many cases, the best need-knower is the person living with a
+            disability. In other cases they may be relatives or care
+            professionals.
+          </p>
+
+          <p>Note: some of our participants are both makers
+            <strong>and</strong> need-knowers - just tick both boxes!</p>
+
+          <label ng-repeat="value in vm.comeAsOptions">
+            <input
+              type="checkbox"
+              value="{{value}}"
+              ng-checked="vm.application.comeAs.indexOf(value) > -1"
+              ng-click="vm.toggleSelection(value)" /> {{value}} </label>
+
+          <input type="hidden" name="comeAs" ng-model="vm.application.comeAs" required>
+          <div ng-messages="vm.form.applicationForm.comeAs.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">At least one choice is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="bio">Provide a quick one paragraph bio telling us about your
+            background and your passions <span class="asterisk" ng-if="vm.applicationFormEditable"> * </span>
+          </label>
+          <textarea id="bio" name="bio" class="form-control" data-input-limit="150" data-input-limit-type="word" data-input-limit-msg="word(s) left" placeholder="write short biography" ng-model="vm.application.bio" required></textarea>
+
+          <div ng-messages="vm.form.applicationForm.bio.$error" role="alert">
+            <p class="help-block error-text" ng-message="required" ng-if="vm.applicationFormEditable">Bio is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="skillSet">Tag your skill-set and how you've put it to
+            use in the past. <span class="asterisk" ng-if="vm.applicationFormEditable"> * </span>
+          </label> <br/>
+          <small>Try finding tags that suits your skills. If you can't find one, just write your skill and TAB</small>
+
+          <tags-input id="skillSet" name="skillSet" min-length="2"
+                      add-on-enter="true" add-on-paste="true"
+                      add-on-comma="true" add-on-blur="false"
+                      ng-model="vm.application.skillSet"
+                      placeholder="at least one tag such as (programming workshop)"
+                      ng-disabled="!vm.applicationFormEditable" required>
+            <auto-complete source="vm.loadTags($query)"
+                           min-length="1"
+                           debounce-delay="0">
+            </auto-complete>
+          </tags-input>
+
+          <div ng-messages="vm.form.applicationForm.skillSet.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Skills tags are required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <input type="hidden" name="makeathonExperience" ng-model="vm.application.makeathonExperience" required />
+          <label class="makeathon-experience">
+            Have you ever participated in a hackathon / makeathon before?
+            <span class="asterisk" ng-if="vm.applicationFormEditable"> * </span><br />
+            <input type="radio" name="rdoMakeathonExperience" id="rdoMakeathonExperience1" ng-model="vm.application.makeathonExperience" value="true"/>
+            <label for="rdoMakeathonExperience1">Yes </label>
+            <input type="radio" name="rdoMakeathonExperience" id="rdoMakeathonExperience2" ng-model="vm.application.makeathonExperience" value="false"/>
+            <label for="rdoMakeathonExperience2">No </label>
+          </label>
+          <div ng-messages="vm.form.applicationForm.makeathonExperience.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Makeathon Experience is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="assistiveTechnology">
+            If you had unlimited time and resources, what would you
+            create in the field of assistive technology?
+          </label>
+          <textarea id="assistiveTechnology" name="assistiveTechnology" class="form-control" data-input-limit="150" placeholder="describe your assistive technology" data-input-limit-type="word" data-input-limit-msg="words(s) left" ng-model="vm.application.assistiveTechnology"></textarea>
+
+          <div ng-messages="vm.form.applicationForm.assistiveTechnology.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Assistive technology is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="teamName">
+            Are you applying as part of a group? If so - specify the
+            team's name here: </label>
+
+          <p>The work at the Makeathon happens in teams.
+          </p>
+
+          <p>If you apply on your own we will match you to a team, if you are
+            applying with others let us know your (self-made) group name so
+            we can keep you all together. It doesn't matter to us what your
+            group name is, as long as you all tell us the same name (and it
+            is reasonably appropriate).
+          </p>
+
+          <input id="teamName" class="form-control" data-input-limit-type="char"
+                 data-input-limit-msg="character(s) left"
+                 placeholder="team's name" name="teamName"
+                 type="text" ng-model="vm.application.teamName"/>
+        </div>
+
+        <div class="form-group">
+          <label for="bonus">
+            Bonus question - you don't have to answer, but it'll be
+            fun :)
+          </label>
+
+          <p>Tell us just
+            <strong>one</strong> of the followings:
+          </p>
+          <ul>
+            <li>What would your profession be if it wasn't the one you
+              already have?</li>
+            <li>Name 3 things you would take to a desert island</li>
+          </ul>
+              <textarea id="bonus" name="bonus"
+                        class="form-control"
+                        data-input-limit="42"
+                        data-input-limit-type="word"
+                        data-input-limit-msg="words(s) left"
+                        ng-model="vm.application.bonus">
+                  My alternative profession would be:
+                  If I were stuck on a desert island, I'd bring:
+              </textarea>
+
+        </div>
+        <div class="form-group" show-errors ng-if="vm.applicationFormEditable">
+          <input id="acceptTerms" name="acceptTerms" class="checkboxStyle"
+                 type="checkbox" ng-model="vm.application.acceptTerms" required/>
+          <label for="acceptTerms">I have read and I accept the
+            <a href="/applications/terms" target="_blank">
+              terms & conditions</a><span class="asterisk"> * </span>
+          </label>
+          <div ng-messages="vm.form.applicationForm.acceptTerms.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Confirmation is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors ng-if="vm.applicationFormEditable">
+          <input id="older18" name="older18" class="checkboxStyle"
+                 type="checkbox" ng-model="vm.application.older18" required/>
+          <label for="older18">Yes, I am 18 or older <span class="asterisk"> * </span>
+          </label>
+          <div ng-messages="vm.form.applicationForm.older18.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Confirmation is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="vm.applicationFormEditable">
+          <button type="submit" class="btn btn-tom">{{vm.application._id ? 'Update' : 'Submit'}}
+          </button>
+          <button ui-sref="home" type="button" class="btn btn-tom">Cancel</button>
+          <div id="formError" ng-if="vm.error" class="text-danger">
+            <strong ng-bind="vm.error"></strong>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
+
+

@@ -1,0 +1,115 @@
+<section>
+  <div class="col-md-9 page-header">
+    <h2 class="col-sm-9 col-md-9">{{vm.registration._id ? 'Edit Registration ' : 'New Registration'}}</h2>
+    <div class="col-sm-3 col-md-3 logo-img pull-right">
+      <a ui-sref="home" rel="home">
+        <img src="modules/core/client/img/brand/tom-logo.png"
+             alt="TOM GLOBAL" class="logo-img-primary"/>
+      </a>
+    </div>
+  </div>
+
+  <div id="primary">
+    <div class="container">
+      <div id="content" class="row">
+        <section id="main" class="col-sm-9 col-md-9 sidebar-right" role="main">
+
+          <form name="vm.form.registrationForm" class="form-horizontal" ng-submit="vm.save(vm.form.registrationForm.$valid)" novalidate1>
+            <fieldset>
+              <div class="form-group">
+                <h2>REGISTRATION FORM TO THE BAY AREA MAKEATHON | SEP. 11-13TH</h2>
+                <div>You are in! To complete your registration please fill in the form:</div>
+                <div>Fields marked with <span class="asterisk"> * </span>are required</div>
+              </div>
+              <div class="form-group">
+                <label for="Phone">Phone Number</label>
+                <p>While not obligatory, this may help us reach you in case we have some questions about the
+                  registrationenge.</p>
+                <input id="Phone" data-mask="(999) 999-9999" data-input-limit-type="char"
+                       data-input-limit-msg="Number only" type="text"
+                       placeholder="(999) 999-9999" ng-model="vm.registration.phone"/>
+              </div>
+              <div class="form-group">
+                <label for="dietaryRestrictions">
+                  Do you have any dietary restrictions we should be aware of?</label>
+                <input id="dietaryRestrictions" class="form-control" ng-model="vm.registration.dietaryRestrictions">
+              </div>
+              <div class="form-group">
+                <label for="specialRequests">
+                  Do you have any special accommodation requests we should know about?</label>
+                <input id="specialRequests" class="form-control" ng-model="vm.registration.specialRequests">
+              </div>
+              <div class="form-group">
+                <label for="emergency">
+                  Emergency contact </label>
+                <p>Name + phone number + relationship to you</p>
+                <input id="emergency" class="form-control" ng-model="vm.registration.emergency">
+              </div>
+              <div class="form-group">
+                <label for="personalBio">Personal bio: describe yourself briefly <span class="asterisk"> * </span></label>
+                <textarea id="personalBio" class="form-control"
+                          ng-model="vm.registration.personalBio" required></textarea>
+                <div ng-messages="vm.form.registrationForm.personalBio.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Personal Bio is required.</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputFile">Upload a high-quality headshot picture <span class="asterisk"> * </span></label>
+                <div>
+                  <p>At least 1MB recommended, otherwise your picture will look grainy in the book</p>
+                </div>
+
+                <input type="file"  ngf-select ng-model="vm.registration.picture" name="file" id="inputFile"
+                       ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" />
+
+                Image thumbnail: <img style="width:100px;" ng-show="!!vm.registration.file" ngf-thumbnail="vm.registration.picture || '/thumb.jpg'"/>
+                <i ng-show="vm.form.registrationForm.picture.$error.required">*required</i><br>
+                <i ng-show="vm.form.registrationForm.picture.$error.maxSize">File too large
+                  {{vm.registration.file.size / 1000000|number:1}}MB: max 20M</i>
+                <!--  Multiple files
+                 <div class="button" ngf-select ng-model="up.files" ngf-multiple="true">Select</div>
+                 Drop files: <div ngf-drop ng-model="up.files" class="drop-box">Drop</div> -->
+                <!--<button type="submit" ng-click="up.submit()">submit</button>-->
+                <p>{{vm.progress}}</p>
+              </div>
+              <div class="form-group">
+                <label>Will you be attending the Kick-off event on Aug. 14th?</label>
+                <p>On Friday, August 14th from 4pm-9pm, we will be having a special kick-off
+                  event at the Google Offices in San Francisco (2-4, 345 Spear St, San Francisco).
+                  While attendance at the kick-off event is not be required it is HIGHLY encouraged.
+                  At the event you will meet the teams and the projects and will get the first chance
+                  to work together.
+                </p>
+                <ul class="radioStyle">
+                  <li>
+                    <label for="radioYes">
+                      <input id="radioYes" type="radio"  value="Yes" ng-model="vm.registration.attendingKickoff" />Yes</label>
+                  </li>
+                  <li>
+                    <label for="radioNo">
+                      <input id="radioNo" type="radio" value="No" ng-model="vm.registration.attendingKickoff" />No</label>
+                  </li>
+                  <li>
+                    <label for="radioMaybe">
+                      <input id="radioMaybe" type="radio"  value="Maybe"  ng-model="vm.registration.attendingKickoff" />Maybe</label>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-default">{{vm.registration._id ? 'Update' : 'Submit'}}</button>
+              </div>
+              <div ng-show="vm.error" class="text-danger">
+                <strong ng-bind="vm.error"></strong>
+              </div>
+            </fieldset>
+          </form>
+        </section>
+        <!-- section#main -->
+      </div>
+    </div>
+  </div>
+  <!-- #primary -->
+</section>
+
+

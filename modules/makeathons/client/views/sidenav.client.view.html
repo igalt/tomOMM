@@ -1,0 +1,24 @@
+<section class="manage-section">
+  <div class="main-header">
+    <h1>{{vm.makeathon.name}} Management</h1>
+    <a class="logo-img" ui-sref="home" rel="home">
+      <img src="modules/core/client/img/brand/tom-logo.png"
+           alt="TOM MMS" class="logo-img-primary"/>
+    </a>
+  </div>
+
+  <div class="manage-view">
+    <nav class="sidenav" ng-if="vm.isAllow">
+      <treecontrol class="tree-light" tree-model="vm.sideMenu" options="vm.opts">
+        <a ng-click="vm.goToState($event, node)">
+          <i class="glyphicon" name={{vm.nodeName(node)}}
+             ng-class="{'active': vm.isStateActive(node),
+          'glyphicon-plus-sign': node.links.length,
+          'glyphicon-ok-sign': vm.isChecklistCompleted(node)}">
+            <span  ng-class="{'space-left': !node.links.length}">{{ node.label }}</span></i></a>
+      </treecontrol>
+    </nav>
+
+    <ui-view class="makathon-view"/>
+  </div>
+</section>

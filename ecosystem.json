@@ -1,0 +1,21 @@
+{
+  // Applications part
+  "apps" : [{
+    "name"      : "TomMMS",           //application name
+    "watch"     : false,               //enable watch & restart feature, if a file change in the folder or subfolder, your app will get reloaded
+    "script"    : "server.js",        //script path relative to pm2 start
+    "cwd"       : "/var/www/tommms",  //the directory from which your app will be launched
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
+  {
+    "name"      : "mmsTST",           //application name
+    "watch"     : false,               //enable watch & restart feature, if a file change in the folder or subfolder, your app will get reloaded
+    "script"    : "server.js",        //script path relative to pm2 start
+    "cwd"       : "/var/www/mmsTST",  //the directory from which your app will be launched
+    "env": {
+      "NODE_ENV": "prod-test"
+    }
+  }]
+}

@@ -1,0 +1,63 @@
+.user-settings-section, .admin-section {
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media (min-width: 992px) {
+  .nav-users {
+    position: fixed;
+  }
+}
+.social-account-container {
+  display: inline-block;
+  position: relative;
+}
+.btn-remove-account {
+  top: 10px;
+  right: 10px;
+  position: absolute;
+}
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: $color-btn-file;
+  cursor: inherit;
+  display: block;
+}
+.user-profile-picture {
+  max-width: 150px;
+  max-height: 150px;
+}
+.socialImg{
+  max-height:60px;
+  max-width:60px;
+  cursor: pointer;
+}
+
+.radioStyle{
+  list-style: none;
+  display: flex;
+  margin: 20px 0 0 -43px;
+  li{
+    margin: 0 5px;
+  }
+}
+
+.auth-section{
+  .main-title{
+    font-size: 1.5em;
+    margin-top: 30px;
+  }
+}
+

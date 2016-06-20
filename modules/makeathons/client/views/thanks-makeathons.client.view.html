@@ -1,0 +1,13 @@
+<section class="makeathon-section" ng-class="{'normal-mode': !vm.manageMode}">
+  <div class="main-header">
+    <h1>{{vm.makeathon.name}} {{vm.htmlHeader}} <i class="fa fa-check-circle fa-2x"></i></h1>
+  </div>
+  <div class="row">
+    <a class="btn btn-tom" ui-sref="home">
+      <span><i class="glyphicon glyphicon-circle-arrow-left"></i> Home </span></a>
+    <a class="btn btn-tom" data-ui-sref="makeathons.view({ makeathonId: vm.makeathon._id })"> View Makeathon </a>
+  </div>
+  <!--Facebook share button -->
+  <div class="fb-share-button" data-href="http://mms.tomglobal.org/manage/{{vm.makeathon._id}}/thanks" data-layout="button" data-mobile-iframe="true"></div>
+  <div class="fb-share-button" data-href="http://mms.tomglobal.org/manage/{{vm.makeathon._id}}/thanks" data-layout="link" data-mobile-iframe="true"></div>
+</section>

@@ -1,0 +1,237 @@
+<section class="challenge-section">
+  <div class="main-header">
+    <h2>{{vm.challenge._id ? vm.challenge.user.displayName : 'New Challenge'}}</h2>
+    <!--Edit Button-->
+    <!--<div class="col-md-1" style="margin-top: 15px;">-->
+      <!--<a class="btn btn-primary" ng-if="!vm.challengeFormEditable"-->
+         <!--data-ui-sref="challenges.edit({challengeId: vm.challenge._id})">-->
+        <!--<i class="glyphicon glyphicon-edit"> EDIT</i>-->
+      <!--</a>-->
+    <!--</div>-->
+    <a ui-sref="home" rel="home">
+      <img src="modules/core/client/img/brand/tom-logo.png"
+           alt="TOM GLOBAL" class="logo-img-primary"/>
+    </a>
+  </div>
+
+  <div>
+    <div class="homeBtn">
+      <button class="btn btn-tom" ng-click="vm.goBack()">
+        <span><i class="glyphicon glyphicon-circle-arrow-left"></i> Back </span>
+      </button>
+    </div>
+
+    <div class="partners-logo-view">
+      <div class="align-right" ng-repeat="partner in vm.makeathon.partners">
+        <img class="partners-img" src={{partner}} alt="partners"/>
+      </div>
+    </div>
+
+    <div>
+      <h2>{{vm.makeathon.name ? vm.makeathon.name : ' Challenge form'}}</h2>
+      <p ng-bind-html="vm.makeathon.challengeDesc | unsafe"></p>
+    </div>
+
+    <form name="vm.form.challengeForm" class="form-horizontal"
+          ng-submit="vm.save(vm.form.challengeForm.$valid)" novalidate>
+
+      <fieldset id="editUserProfile" class="fieldset-container"
+                ng-if="vm.challengeFormEditable">
+        <div class="form-group info-Title">
+          <h2>Your Profile</h2>
+          <div>Fields marked with <span class="asterisk" ng-if="vm.challengeFormEditable"> * </span>are required
+          </div>
+        </div>
+        <edit-profile-component></edit-profile-component>
+      </fieldset>
+
+      <fieldset  class="fieldset-container" ng-disabled="!vm.challengeFormEditable">
+        <div class="form-group info-Title">
+          <h2>Challenge info</h2>
+
+          <div ng-if="vm.challengeFormEditable">
+            Fields marked with <span class="asterisk" ng-if="vm.challengeFormEditable"> * </span>are required
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="connectionToChallenge">What is your connection to the challenge?
+            <span class="asterisk" ng-if="vm.challengeFormEditable"> * </span></label>
+          <select id="connectionToChallenge" class="form-control" name="connectionToChallenge"
+                  ng-model="vm.challenge.connectionToChallenge" required>
+            <option value="living">
+              I&#039;m living with a disability and this is my challenge
+            </option>
+            <option value="related">I am related to a person living with a disability, and know their
+              challenge
+            </option>
+            <option value="idea">
+              I have a good idea for an assistive technology device
+            </option>
+          </select>
+
+          <div ng-messages="vm.form.challengeForm.connectionToChallenge.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Relation is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="description">The need or challenge <span class="asterisk" ng-if="vm.challengeFormEditable"> * </span></label>
+          <div>
+            <p><strong>Please describe the challenge you are
+              presenting</strong>. This should be a brief description but be sure to mention all the
+              main points you expect will be addressed by a potential solution. Basic, non identifying
+              medical data such as source and time span of the condition involved is also welcome
+              here.</p>
+
+            <p><strong>Note:</strong> at this stage we are not looking for solutions, but rather for
+              a good definition of the needs. We know this is not easy, (we often do this
+              ourselves) but please try to describe the challenge and not suggest solutions.</p>
+
+            <p><strong>Media is welcome</strong> - YouTube clips, images and files (files may be
+              uploaded in the next section).</p>
+          </div>
+                <textarea id="description" class="form-control" ng-model="vm.challenge.desc" name="desc"
+                          placeholder="write a brief description about the mention challenge" required></textarea>
+
+          <div ng-messages="vm.form.challengeForm.desc.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Description is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="!vm.challengeFormEditable">
+          <label>Challenge Files</label>
+          <br />
+          <div ng-if="vm.challenge.files.length">
+
+            <p>Files count: {{ vm.challenge.files.length }}</p>
+
+            <table class="table">
+              <tbody>
+              <tr ng-repeat="file in vm.challenge.files">
+                <td><a ng-href={{file.url}} target="_blank">{{ file.name }}</a></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="vm.challengeFormEditable">
+          <label for="inputFile">Upload File</label>
+
+          <div>
+            <p>If you have files containing information that
+              will help us better understand the challenge, this is the place for them (use ZIP to
+              bind files together if needed). For very large files, upload to <a
+                href="https://www.google.com/drive/">Google Drive</a> and paste a link in the
+              challenge description.</p>
+          </div>
+
+                <span class="btn btn-tom btn-file">
+                    Upload Files
+                  <input id="inputFile" type="file" nv-file-select uploader="vm.uploader" multiple/>
+                </span>
+
+          <div ng-show="vm.uploaderQueue.length">
+
+            <h3>Upload queue</h3>
+            <p>Queue length: {{ vm.uploaderQueue.length }}</p>
+
+            <table class="table">
+              <thead>
+              <tr>
+                <th width="50%">Name</th>
+                <th ng-show="vm.uploader.isHTML5">Size</th>
+                <!--<th ng-show="vm.uploader.isHTML5">Progress</th>-->
+                <!--<th>Status</th>-->
+                <!--<th>Actions</th>-->
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="item in vm.uploaderQueue">
+                <td><strong>{{ item.file.name }}</strong></td>
+                <td ng-show="vm.uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                <!--<td ng-show="vm.uploader.isHTML5">-->
+                <!--<div class="progress" style="margin-bottom: 0;">-->
+                <!--<div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>-->
+                <!--</div>-->
+                <!--</td>-->
+                <!--<td class="text-center">-->
+                <!--<span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>-->
+                <!--<span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>-->
+                <!--<span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>-->
+                <!--</td>-->
+                <td nowrap>
+                  <!--<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">-->
+                  <!--<span class="glyphicon glyphicon-upload"></span> Upload-->
+                  <!--</button>-->
+                  <!--<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">-->
+                  <!--<span class="glyphicon glyphicon-ban-circle"></span> Cancel-->
+                  <!--</button>-->
+                  <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="item.remove()">
+                    <span class="glyphicon glyphicon-trash"></span> Remove
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div>
+              <!--<div>-->
+              <!--Queue progress:-->
+              <!--<div class="progress">-->
+              <!--<div class="progress-bar" role="progressbar" ng-style="{ 'width': vm.uploader.progress + '%' }"></div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<button type="button" class="btn btn-success btn-s" ng-click="vm.uploader.uploadAll()" ng-disabled="!vm.uploader.getNotUploadedItems().length">-->
+              <!--<span class="glyphicon glyphicon-upload"></span> Upload all-->
+              <!--</button>-->
+              <!--<button type="button" class="btn btn-warning btn-s" ng-click="vm.uploader.cancelAll()" ng-disabled="!vm.uploader.isUploading">-->
+              <!--<span class="glyphicon glyphicon-ban-circle"></span> Cancel all-->
+              <!--</button>-->
+              <button type="button" class="btn btn-danger btn-s" ng-click="vm.uploader.clearQueue()" ng-disabled="!vm.uploaderQueue.length">
+                <span class="glyphicon glyphicon-trash"></span> Remove all
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="needKnowerParticipate">
+            Will the need-knower (from above) be able to participate in the makeathon?
+            <span class="asterisk" ng-if="vm.challengeFormEditable"> * </span>
+          </label>
+
+          <div>
+            <p><strong>Need-Knowers </strong>are people that
+              have an intimate understanding of the challenges faced by people with disabilities. In
+              many cases, the best need-knower is the person living with a disability. In other cases
+              they may be close relatives, care professionals or others. At {{vm.makeathon.name}} we want
+              <strong>Need-knowers </strong>to be part of the development teams. A challenge is
+              <strong>much </strong>more likely to be addressed when the need-knowers are close by.
+              Our makeathon is planned to take place on <strong>{{vm.makeathon.startDate | date: 'mediumDate'}} at {{vm.makeathon.venue}}.
+                Will the Need-Knower be able to attend?</strong></p>
+          </div>
+          <select id="needKnowerParticipate" class="form-control"
+                  ng-model="vm.challenge.needKnowerParticipate">
+            <option value="Yes, completely">Yes, completely</option>
+            <option value="Yes, partially">Yes, partially</option>
+            <option value="No, they can&#039;t">No, they can&#039;t</option>
+            <option value="Not sure">Not sure</option>
+          </select>
+        </div>
+
+        <div class="text-center form-group" ng-if="vm.challengeFormEditable">
+          <button type="submit" class="btn btn-tom">{{vm.challenge._id ? 'Update challenge' : 'Submit a challenge'}}
+          </button>
+          <button ui-sref="home" type="button" class="btn btn-tom">Cancel</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
+
+
+

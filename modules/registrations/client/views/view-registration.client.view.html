@@ -1,0 +1,26 @@
+<section>
+  <div class="page-header">
+    <h1 data-ng-bind="vm.registration.name"></h1>
+  </div>
+  <div class="pull-right"
+       data-ng-show="vm.registration.isCurrentUserOwner">
+    <a class="btn btn-primary"
+       data-ui-sref="registrations.edit({ registrationId: vm.registration._id })">
+      <i class="glyphicon glyphicon-edit"> EDIT</i>
+    </a>
+    <a class="btn btn-primary" data-ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span data-ng-bind="vm.registration.created | date:'mediumDate'"></span>
+      by
+      <span data-ng-if="vm.registration.user"
+            data-ng-bind="vm.registration.user.displayName"></span>
+      <span data-ng-if="!vm.registration.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" data-ng-bind="vm.registration.content"></p>
+</section>

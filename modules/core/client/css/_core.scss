@@ -1,0 +1,163 @@
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: $color-bg;
+  background-size: auto;
+  color: $color-main-font;
+  font-family: $font_0, $font_1, $font_2;
+  font-weight: normal;
+  font-size: 14px;
+  text-transform: none;
+  font-style: normal;
+  line-height: 2em;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+
+  header{
+    width: 100%;
+    height: 70px;
+    background-color: $color_header-bg;
+    .header-profile-image {
+      opacity: 0.8;
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .user-header-dropdown-toggle {
+      padding-top: 11px !important;
+      padding-bottom: 11px !important;
+    }
+    .open .header-profile-image {
+      opacity: 1;
+    }
+    ul>li>a{
+      color: $color_header-a;
+    }
+    a:hover .header-profile-image {
+      opacity: 1;
+    }
+
+    .navbar-brand{
+      padding: 0 15px;
+    }
+
+    .navbar-brand > img{
+      max-width: 118px;
+    }
+  }
+
+  main {
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .root_section{
+      width: 100%;
+    }
+  }
+}
+
+.home-section {
+  width: 100%;
+  padding: 1em 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .banner {
+    display: block;
+    width: 100% !important;
+    position: relative;
+    margin-bottom: 1em;
+
+    img {
+      opacity: 0.8;
+      width: 100% !important;
+    }
+
+    .bannerText {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: space-around;
+      position:absolute;
+      bottom:50px;
+      left:0;
+      width:100%;
+      padding-top:10px;
+      height: 120px;
+      background-color:$color-bg-banner;
+      font-size: 3em;
+      color: $color-font-banner;
+      opacity: 0.8; /* transparency */
+      filter:alpha(opacity=60); /* IE transparency */
+    }
+  }
+  .makeathons-list{
+    width: 80%;
+  }
+}
+
+[ng-cloak] {
+  display: none !important;
+}
+[x-ng-cloak] {
+  display: none !important;
+}
+.ng-cloak {
+  display: none !important;
+}
+.x-ng-cloak {
+  display: none !important;
+}
+[ng\:cloak] {
+  display: none !important;
+}
+
+
+.error-text {
+  display: none;
+}
+.has-error {
+  .help-block.error-text {
+    display: block;
+  }
+  .help-inline.error-text {
+    display: inline;
+  }
+}
+
+
+.space-top5 { margin-top:5px; }
+.space-top7 { margin-top:7px; }
+.space-top10 { margin-top:10px; }
+.space-top15 { margin-top:15px; }
+.space-top20 { margin-top:20px; }
+.space-top30 { margin-top:30px; }
+
+.btn-primary{
+  margin: 5px;
+}
+
+.navbar-nav{
+  min-height: 70px;
+  font-size: 1.5em;
+  height: 60px;
+  .dropdown-toggle{
+    min-height: 70px;
+  }
+}
+
+.sign-in, .sign-up{
+  min-height: 70px;
+  span{
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+

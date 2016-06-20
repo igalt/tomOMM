@@ -1,0 +1,73 @@
+treecontrol {
+  /* prevent user selection */
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: none;
+    overflow: hidden;
+  }
+  li {
+    position: relative;
+    line-height: 28px;
+    .tree-label {
+      cursor: pointer;
+      display: flex;
+      align-items: baseline;
+    }
+  }
+  &.tree-light li {
+    a {
+      width: 275px;
+      display: block;
+      margin-bottom: 2px;
+      position: relative;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+    i{
+      font-size: 1.2em;
+      display: block;
+      padding: 10px;
+      margin-left: 0;
+      border-radius: 4px;
+      &:hover, &:focus{
+        background-color: #eee;
+      }
+      &.active {
+        background-color: #337ab7;
+        color: #ffffff;
+      }
+    }
+  }
+  .space-left {
+      margin-left: 22px;
+  }
+  .glyphicon {
+    display: inline;
+    color: #337ab7;
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+  .glyphicon:before{
+    margin-right: 8px;
+    font-family:'Glyphicons Halflings';
+  }
+  .sub-itemtree > ul > li > div {
+      padding-left: 15px;
+  }
+  .glyphicon-ok-sign{
+    color: green;
+  }
+}
+

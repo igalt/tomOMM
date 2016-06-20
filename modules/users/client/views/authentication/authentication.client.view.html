@@ -1,0 +1,14 @@
+<section class="row auth-section">
+  <h4 class="col-md-12 text-center main-title"><strong>TOM</strong> is all about connecting people with disabilities with Makers and developing solutions for everyday challenges.</br>
+  Before you can fill an application form for one of our events, we want to know who you are.</h4>
+  <h4 class="col-md-12 text-center"> Please {{pageName}} using your social accounts</h4>
+  <div class="col-md-12 text-center">
+    <img class="socialImg" ng-click="callOauthProvider('/api/auth/facebook')" ng-src="/modules/users/client/img/buttons/facebook.png">
+    <img class="socialImg" ng-click="callOauthProvider('/api/auth/google')" ng-src="/modules/users/client/img/buttons/google.png">
+    <img class="socialImg" ng-click="callOauthProvider('/api/auth/linkedin')" ng-src="/modules/users/client/img/buttons/linkedin.png">
+    <!--<img class="socialImg" ng-click="callOauthProvider('/api/auth/twitter')" ng-src="/modules/users/client/img/buttons/twitter.png">-->
+    <!--<img class="socialImg" ng-click="callOauthProvider('/api/auth/github')" ng-src="/modules/users/client/img/buttons/github.png">-->
+    <!--<img class="socialImg" ng-click="callOauthProvider('/api/auth/paypal')"  ng-src="/modules/users/client/img/buttons/paypal.png">-->
+  </div>
+  <div ui-view></div>
+</section>
