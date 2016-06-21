@@ -36,6 +36,13 @@
       </div>
 
       <div class="form-group">
+        <label for="skills">Skills:</label>
+        <input type="text" class="form-control" id="skills" name="skills"
+               placeholder="Skills" ng-model="user.skills">
+        <p>Please provide any skills you have which may help - start typing and a relevant skill list will appear.</p>
+      </div>
+
+      <div class="form-group">
         <label for="Phone">Phone number</label>
         <input class="form-control" id="Phone" name="Phone" data-input-limit-type="char"
                data-input-limit-msg="Numbers only" type="text"
@@ -314,6 +321,12 @@
         <label for="city">City</label>
         <input type="text" class="form-control" id="city" name="city"
                placeholder="City" ng-model="user.address.city">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" name="description"
+               placeholder="Description" ng-model="user.description">
       </div>
 
       <div class="text-center form-group">

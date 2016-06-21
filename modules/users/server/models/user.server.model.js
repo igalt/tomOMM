@@ -78,23 +78,23 @@ var UserSchema = new Schema({
   roles: {
     type: [{
       type: String,
-      enum: ['guest','user', 'admin']
+      enum: ['guest','user','admin']
     }],
     default: ['guest'],
     required: 'Please provide at least one role'
   },
-  updated: {
-    type: Date
+  skills: {
+    type: [{
+      type: String,
+      enum: ['engineer','designer', 'software engineer']
+    }]
+    //required: 'Please provide at least one skill'
   },
   created: {
     type: Date,
     default: Date.now
   },
-  /* For reset password */
-  resetPasswordToken: {
-    type: String
-  },
-  resetPasswordExpires: {
+  updated: {
     type: Date
   },
   occupation: {
@@ -122,7 +122,25 @@ var UserSchema = new Schema({
   phone: {
     type: String,
     default: ''
+  },
+  projects: [{
+    type: Number
+  }],
+  challenges: [{
+    type: Number
+  }],
+  description: {
+    type: String,
+    default: ''
+  },
+  /* For reset password */
+  resetPasswordToken: {
+    type: String
+  },
+  resetPasswordExpires: {
+    type: Date
   }
+
 });
 
 /**
@@ -211,7 +229,7 @@ UserSchema.statics.generateRandomPassphrase = function () {
         numbers: true,
         symbols: false,
         uppercase: true,
-        excludeSimilarCharacters: true,
+        excludeSimilarCharacters: true
       });
 
       // check if we need to remove any repeating characters.
