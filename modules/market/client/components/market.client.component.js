@@ -10,13 +10,22 @@
         controllerAs: 'vm'
     });
 
-    marketComponent.$inject = ['Authentication'];
+    marketComponent.$inject = ['Authentication', '$rootScope', '$window'];
 
-    function marketComponent (Authentication) {
+    function marketComponent (Authentication, $rootScope, $window) {
         var vm = this;
 
         // This provides Authentication context.
         vm.authentication = Authentication;
+
+        // allows for using external links with ui-router
+        $rootScope.$on('$stateChangeStart',
+            function(event, toState, toParams, fromState, fromParams) {
+                if (toState.external) {
+                    event.preventDefault();
+                    $window.open(toState.url, '_self');
+                }
+            });
 
     }
 })();

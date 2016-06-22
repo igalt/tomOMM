@@ -12,11 +12,18 @@
       .state('market', {
         url: '/market',
         component: 'marketComponent',
-        date: {
+        data: {
           roles: ['guest', 'user', 'admin'],
           pageTitle: 'Open Makers Market'
         }
-      });
+      })
+      .state('tomSite', {
+        url: 'http://tomglobal.org',
+        external: true,
+        data: {
+          roles: ['guest', 'user', 'admin']
+        }
+    });
   }
 
   getMarket.$inject = ['$stateParams', 'marketService'];

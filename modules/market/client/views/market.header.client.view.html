@@ -19,7 +19,7 @@
             ng-class="{ dropdown: item.type === 'dropdown' }" ui-sref-active="active" class="{{item.class}}"
             uib-dropdown="item.type === 'dropdown'">
           <a ng-switch-when="dropdown" class="dropdown-toggle" uib-dropdown-toggle role="button">
-            <div style="padding-top:10px;">{{::item.title}}&nbsp;<span class="caret"></span></div></a>
+            <div>{{::item.title}}&nbsp;<span class="caret"></span></div></a>
           <ul ng-switch-when="dropdown" class="dropdown-menu">
             <li ng-repeat="subitem in item.items | orderBy: 'position'"
                 ng-if="subitem.shouldRender(vm.authentication.user);">
@@ -41,7 +41,7 @@
       <ul class="nav navbar-nav navbar-right" ng-show="vm.authentication.user">
         <li class="dropdown" uib-dropdown>
           <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
-            <div style="padding-top:10px;">
+            <div>
               <img ng-src="{{vm.authentication.user.profileImageURL}}"
                    alt="{{vm.authentication.user.displayName}}" class="header-profile-image"/>
               <span ng-bind="vm.authentication.user.displayName"></span> <b class="caret"></b>
