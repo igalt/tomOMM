@@ -168,5 +168,9 @@ angular.module('core').service('Menus', [
     this.addMenu('topbar', {
       roles: ['*']
     });
+
+    this.addMenu('market',{
+      roles: ['*']
+    });
   }
 ]);

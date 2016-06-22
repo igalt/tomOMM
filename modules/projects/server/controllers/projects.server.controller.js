@@ -15,7 +15,7 @@ var path = require('path'),
 exports.create = function(req, res) {
   var project = new Project(req.body);
   project.project_owner = req.user;
-  if (! req.user || project.team.length == 0) {
+  if (! req.user || project.team.length === 0) {
     project.team.push(req.user);
   }
 

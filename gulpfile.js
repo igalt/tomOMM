@@ -28,6 +28,7 @@ gulp.task('env:test', function () {
 // Set NODE_ENV to 'development'
 gulp.task('env:dev', function () {
   process.env.NODE_ENV = 'development';
+  process.env.port = 3002;
 });
 
 // Set NODE_ENV to 'production'
