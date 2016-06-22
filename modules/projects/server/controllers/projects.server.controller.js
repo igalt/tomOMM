@@ -15,7 +15,7 @@ var path = require('path'),
 exports.create = function(req, res) {
   var project = new Project(req.body);
   project.project_owner = req.user;
-  if (! req.user || project.team.length == 0) {
+  if (! req.user || project.team.length === 0) {
     project.team.push(req.user);
   }
 
@@ -103,7 +103,7 @@ exports.delete = function(req, res) {
  * List of all Projects
  */
 exports.list = function(req, res) {
-  var userSelectFields = 'firstName lastName displayName email';
+  var userSelectFields = 'firstName lastName displayName email profileImageURL';
   Project.find()
       .sort('-creation_date')
       .populate('project_owner', userSelectFields)
@@ -133,7 +133,7 @@ exports.projectByID = function(req, res, next, id) {
     });
   }
 
-  var userSelectFields = 'firstName lastName displayName email';
+  var userSelectFields = 'firstName lastName displayName email profileImageURL';
 
   Project.findById(id)
       .populate('project_owner', userSelectFields)
@@ -166,7 +166,7 @@ exports.quickViewByID = function(req, res, next, id) {
     });
   }
 
-  var userSelectFields = 'firstName lastName displayName email';
+  var userSelectFields = 'firstName lastName displayName email profileImageURL';
 
   Project.findById(id)
       .populate('project_owner', userSelectFields)

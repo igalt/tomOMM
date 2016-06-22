@@ -18,7 +18,8 @@ var ApplicationConfiguration = (function () {
     'textAngular',
     'ngclipboard',
     'treeControl',
-    'toaster'
+    'toaster',
+    'ngMaterial'
   ];
 
   // Add a new vertical module

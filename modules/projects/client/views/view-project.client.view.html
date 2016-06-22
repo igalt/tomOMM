@@ -1,26 +1,103 @@
-<section>
-  <div class="page-header">
-    <h1 data-ng-bind="vm.project.name"></h1>
+<section class="projects_section">
+  <div>
+    <div layout="row" layout-align="space-around center">
+      <div flex="10"></div>
+
+      <div flex>
+        <div layout="column" layout-align="space-around center">
+
+          <div flex>
+            <div flex>
+              <div class="project_title">{{vm.project.title}}</div>
+            </div>
+          </div>
+
+
+          <div layout="row" layout-align="start start">
+            <div flex="33">
+              <img ng-src="{{ vm.project.icon }}" class="projects_section project_main_image">
+            </div>
+
+            <div flex="66">
+              <div layout="column" layout-align="start">
+                <div flex>
+                  <md-content flex layout-padding>
+                    <p>{{vm.project.description}}</p>
+                  </md-content>
+                </div>
+
+                <div flex>
+                  <md-content class="md-padding" layout="column">
+                    <md-chips ng-model="vm.project.tags" readonly="true">
+                      <md-chip-template>
+                        {{$chip}}
+                      </md-chip-template>
+                    </md-chips>
+                  </md-content>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div layout="column" layout-align="space-around center">
+            <div flex>
+              <md-content class="md-padding" layout="column">
+                <h2 class="md-title">Team Members</h2>
+              </md-content>
+            </div>
+
+            <div flex>
+              <md-content class="md-padding" layout-xs="column" layout="row">
+                <div flex-xs flex-gt-xs="35" layout="column" ng-repeat="teamMember in vm.project.team">
+                  <md-card>
+                    <img ng-src="{{teamMember.profileImageURL}}" class="md-card-image" alt="{{teamMember.displayName}}">
+                    <md-card-title>
+                      <md-card-title-text>
+                        <span >{{teamMember.displayName}}</span>
+                      </md-card-title-text>
+                    </md-card-title>
+                  </md-card>
+                </div>
+              </md-content>
+            </div>
+
+            <div flex>
+              <md-content class="md-padding" layout="row" layout-align="center center">
+                <div class="row_title">We are looking for</div>
+                <md-chips ng-model="vm.project.looking_for" readonly="true">
+                  <md-chip-template>
+                    {{$chip}}
+                  </md-chip-template>
+                </md-chips>
+              </md-content>
+            </div>
+          </div>
+
+
+
+          <div layout="column" layout-align="start stretch">
+            <div flex>
+              <h2 class="md-title">Followers</h2>
+            </div>
+
+            <div flex>
+              <md-virtual-repeat-container id="horizontal-container" md-orient-horizontal>
+                <div md-virtual-repeat="follower in vm.project.followers" class="repeated-item" flex>
+                  <img ng-src="{{follower.profileImageURL}}?{{$index}}" class="md-avatar img-circle" alt="{{follower.displayName}}" />
+                </div>
+              </md-virtual-repeat-container>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <div flex="10"></div>
+
+    </div>
   </div>
-  <div class="pull-right"
-       data-ng-show="vm.project.isCurrentUserOwner">
-    <a class="btn btn-primary"
-       data-ui-sref="projects.edit({ projectId: vm.project._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" data-ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span data-ng-bind="vm.project.created | date:'mediumDate'"></span>
-      by
-      <span data-ng-if="vm.project.user"
-            data-ng-bind="vm.project.user.displayName"></span>
-      <span data-ng-if="!vm.project.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" data-ng-bind="vm.project.content"></p>
 </section>
