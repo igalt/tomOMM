@@ -7,16 +7,21 @@
       //completeProfile: '='
     },
     templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html',
-    controller: editProfileComponent
+    controller: editProfileComponent,
+    controllerAs: 'vm'
   });
 
-  editProfileComponent.$inject = ['$scope', '$state', 'Users', 'Authentication', 'toaster'];
+  editProfileComponent.$inject = ['$scope', '$state', '$http', 'Users', 'Authentication', 'toaster'];
 
-  function editProfileComponent($scope, $state, Users, Authentication, toaster) {
+  function editProfileComponent($scope, $state, $http, Users, Authentication, toaster) {
 
     $scope.user = Authentication.user;
     //$scope.completeProfile = isProfileComplete();
     $scope.isStateEditProfile = false;
+    var allSkillTags;
+    getAllTags();
+
+    this.loadTags = filterTags;
 
     //if ($scope.completeProfile){
     //  $('#editUserProfile').hide();
@@ -77,6 +82,19 @@
         }
       }
       return true;
+    }
+
+    function getAllTags() {
+      return $http.get('/api/skillTags', { cache: true })
+          .then(function(response) {
+            allSkillTags = response.data[0].skills;
+          });
+    }
+
+    function filterTags($query) {
+      return allSkillTags.filter(function (skill) {
+        return skill.text.toLowerCase().indexOf($query.toLowerCase()) !== -1;
+      });
     }
   }
 })();
