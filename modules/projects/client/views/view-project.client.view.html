@@ -153,7 +153,7 @@
                         <p>{{ file.file_type }}</p>
                       </div>
                       <div flex="33">
-                        <md-button class="md-raised md-primary">Download</md-button>
+                        <md-button class="md-raised md-primary" ng-href="{{ file.url }}" target="_blank">Download</md-button>
                       </div>
                     </div>
                     <md-divider></md-divider>
@@ -167,7 +167,7 @@
                         <img ng-src="{{ image }}" class="project_media_image">
                       </div>
                       <div flex="33">
-                        <md-button class="md-raised md-primary">Download</md-button>
+                        <md-button class="md-raised md-primary" target="_blank" ng-href="{{ image }}">Download</md-button>
                       </div>
                     </div>
                     <md-divider></md-divider>
@@ -181,7 +181,7 @@
                         <youtube-video video-url="vm.getVideoLink(vid)"></youtube-video>
                       </div>
                       <div flex="33">
-                        <md-button class="md-raised md-primary">Watch Video</md-button>
+                        <md-button class="md-raised md-primary" target="_blank" ng-href="{{ vid }}">Watch Video</md-button>
                       </div>
                     </div>
                     <md-divider></md-divider>
@@ -198,7 +198,7 @@
                         <p>{{ link.link_type }}</p>
                       </div>
                       <div flex="33">
-                        <md-button class="md-raised md-primary">Open Link</md-button>
+                        <md-button class="md-raised md-primary" target="_blank" ng-href="{{ link.url }}">Open Link</md-button>
                       </div>
                     </div>
                     <md-divider></md-divider>
