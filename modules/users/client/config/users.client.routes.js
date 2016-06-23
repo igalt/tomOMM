@@ -46,6 +46,18 @@
           roles: ['guest', 'user', 'admin']
         }
       })
+      .state('userprofile', {
+        abstract: true,
+        url: '/userprofile',
+        component: 'userProfileComponent'
+      })
+      .state('userprofile.view', {
+        url: '/view',
+        component: 'showUserProfileComponent',
+        data: {
+          roles: ['guest','user','admin']
+        }
+      })
       .state('authentication', {
         abstract: true,
         url: '/authentication',

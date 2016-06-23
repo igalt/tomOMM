@@ -35,12 +35,30 @@
         <p>If you are a student, please let us know where you study.</p>
       </div>
 
-      <div class="form-group">
-        <label for="skills">Skills:</label>
-        <input type="text" class="form-control" id="skills" name="skills"
-               placeholder="Skills" ng-model="user.skills">
-        <p>Please provide any skills you have which may help - start typing and a relevant skill list will appear.</p>
+      <div class="form-group" show-errors>
+        <label for="skillSet">Tag your skill-set and how you've put it to
+          use in the past. <span class="asterisk" ng-if="vm.applicationFormEditable"> * </span>
+        </label> <br/>
+        <small>Try finding tags that suits your skills. If you can't find one, just write your skill and TAB</small>
+
+        <tags-input class="tags" id="skillSet" name="skillSet" min-length="2"
+                    add-on-enter="true" add-on-paste="true"
+                    add-on-comma="true" add-on-blur="false"
+                    ng-model="user.skills"
+                    placeholder="at least one tag such as (programming workshop)"
+                    required>
+          <auto-complete source="vm.loadTags($query)"
+                         min-length="1"
+                         debounce-delay="0">
+          </auto-complete>
+        </tags-input>
+
+        <div ng-messages="vm.form.applicationForm.skillSet.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Skills tags are required.</p>
+        </div>
       </div>
+
+
 
       <div class="form-group">
         <label for="Phone">Phone number</label>

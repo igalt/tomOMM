@@ -83,13 +83,7 @@ var UserSchema = new Schema({
     default: ['guest'],
     required: 'Please provide at least one role'
   },
-  skills: {
-    type: [{
-      type: String,
-      enum: ['engineer','designer', 'software engineer']
-    }]
-    //required: 'Please provide at least one skill'
-  },
+  skills: {},
   created: {
     type: Date,
     default: Date.now
@@ -123,12 +117,8 @@ var UserSchema = new Schema({
     type: String,
     default: ''
   },
-  projects: [{
-    type: Number
-  }],
-  challenges: [{
-    type: Number
-  }],
+  projects: {},
+  challenges: {},
   description: {
     type: String,
     default: ''

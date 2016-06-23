@@ -1,0 +1,33 @@
+<section class="">
+  <div class="personal-details-section content-area">
+    <h2>Personal Details</h2>
+    <p><strong class="red-color">Name:</strong> {{user.firstName + " " + user.lastName}}</p>
+    <p><strong class="red-color">Where do I live:</strong> {{user.address.city+", "+user.address.country}}</p>
+    <p><strong class="red-color">Occupation:</strong> {{user.occupation}}</p>
+  </div>
+  <div class="bio-section">
+    <h2>Biography</h2>
+    <p>{{user.description}}</p>
+  </div>
+  <div class="skills-section">
+    <h2>Skills</h2>
+    <div ng-repeat="skill in user.skills">
+      <span>{{skill.text}}</span>
+    </div>
+  </div>
+  <div class="project-attended">
+    <h2>Projects</h2>
+    <div class="current-project">
+      <h3>Current Project</h3>
+    </div>
+    <div class="past-projects">
+      <h3>Past Projects</h3>
+    </div>
+  </div>
+
+
+      <toaster-container toaster-options="{'position-class': 'toast-bottom-right'}">
+      </toaster-container>
+
+
+</section>
