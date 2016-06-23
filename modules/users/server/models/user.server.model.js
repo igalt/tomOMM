@@ -117,8 +117,8 @@ var UserSchema = new Schema({
     type: String,
     default: ''
   },
-  projects: {},
-  challenges: {},
+  projects: [],
+  challenges: [],
   description: {
     type: String,
     default: ''
