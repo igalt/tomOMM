@@ -12,5 +12,7 @@
     
     function challengeQuickViewComponent ($state) {
         var vm = this;
+
+        
     }
 })();
