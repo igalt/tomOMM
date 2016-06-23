@@ -1,26 +1,242 @@
-<section>
-  <div class="page-header">
-    <h1 data-ng-bind="vm.project.name"></h1>
+<section class="projects_section">
+  <div>
+    <div layout="row" layout-align="space-around center">
+      <div flex="10"></div>
+
+      <div flex>
+        <div layout="column" layout-align="space-around center">
+
+          <div flex>
+            <div flex>
+              <div class="project_title">{{vm.project.title}}</div>
+            </div>
+          </div>
+
+
+          <div layout="row" layout-align="start start">
+            <div flex="33">
+              <img ng-src="{{ vm.project.icon }}" class="projects_section project_main_image">
+            </div>
+
+            <div flex="66">
+              <div layout="column" layout-align="start">
+                <div flex>
+                  <md-content flex layout-padding>
+                    <p>{{vm.project.description}}</p>
+                  </md-content>
+                </div>
+
+                <div flex>
+                  <md-content class="md-padding" layout="column">
+                    <md-chips ng-model="vm.project.tags" readonly="true">
+                      <md-chip-template>
+                        {{$chip}}
+                      </md-chip-template>
+                    </md-chips>
+                  </md-content>
+                </div>
+
+                <div>
+                  <md-content class="md-padding" layout="column">
+                    <p class="review_creation_date">started on {{vm.project.creation_date | date : format : timezone }}</p>
+                  </md-content>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div layout="column" layout-align="space-around center">
+            <div flex>
+              <md-content class="md-padding" layout="column">
+                <h2 class="md-title">Team Members</h2>
+              </md-content>
+            </div>
+
+            <div flex>
+              <md-content class="md-padding popup_container" layout-xs="column" layout="row">
+                <div flex-xs flex-gt-xs="35" layout="column" ng-repeat="teamMember in vm.project.team">
+                  <a href ng-click="vm.showUserPreview($event, teamMember)" class="project_team_user_link">
+                    <md-card>
+                      <div class="itemsContainer">
+                        <img ng-src="{{teamMember.profileImageURL}}" class="md-card-image" alt="{{teamMember.displayName}}">
+                        <div class="user_preview"><i class="material-icons">search</i> </div>
+                      </div>
+
+                      <md-card-title>
+                        <md-card-title-text>
+                          <span >{{teamMember.displayName}}</span>
+                        </md-card-title-text>
+                      </md-card-title>
+                    </md-card>
+                  </a>
+                </div>
+              </md-content>
+            </div>
+
+            <div flex>
+              <md-content class="md-padding" layout="row" layout-align="center center">
+                <div class="row_title">We are looking for</div>
+                <md-chips ng-model="vm.project.looking_for" readonly="true">
+                  <md-chip-template>
+                    {{$chip}}
+                  </md-chip-template>
+                </md-chips>
+              </md-content>
+            </div>
+          </div>
+
+
+
+          <div layout="column" layout-fill layout-align="center center" class="project_section_item">
+            <div flex>
+              <h2 class="md-title">Followers</h2>
+            </div>
+
+            <div layout="row" layout-fill layout-align="center center">
+              <md-virtual-repeat-container layout-fill id="horizontal-container" md-orient-horizontal>
+                <div md-virtual-repeat="follower in vm.project.followers" class="repeated-item" flex>
+                  <a href ng-click="vm.showUserPreview($event, follower)" class="project_team_user_link">
+                    <md-container style="overflow:visible">
+                      <img ng-src="{{follower.profileImageURL}}?{{$index}}" class="md-avatar img-circle" alt="{{follower.displayName}}" />
+                      <md-tooltip class="project_follower_tooltip">
+                        {{ follower.displayName }}
+                      </md-tooltip>
+                    </md-container>
+                  </a>
+                </div>
+              </md-virtual-repeat-container>
+            </div>
+          </div>
+
+
+          <div layout="column" layout-align="space-around center" class="project_section_item">
+            <div flex>
+              <md-content class="md-padding" layout="column">
+                <h2 class="md-title">Reviews</h2>
+              </md-content>
+            </div>
+
+            <div flex>
+              <md-content class="md-padding review_container" layout-align="start start">
+                <md-card class="review_item" ng-repeat="reviewItem in vm.project.reviews">
+                  <md-card-title>
+                    <md-card-title-text>
+                      <a href ng-click="vm.showUserPreview($event, reviewItem.user)" class="project_team_user_link">
+                        <div layout="row" layout-align="start start" class="review_header">
+                          <img ng-src="{{reviewItem.user.profileImageURL}}?{{$index}}" class="md-avatar img-circle review_user_img" alt="{{reviewItem.user.displayName}}" />
+                          <h3 class="md-headline review-title">{{ reviewItem.user.displayName }}</h3>
+                        </div>
+                      </a>
+                    </md-card-title-text>
+                  </md-card-title>
+
+                  <md-card-content>
+                    <div>
+                      <p>{{ reviewItem.review }}</p>
+                    </div>
+                    <div class="review_creation_date">
+                      created on {{ reviewItem.creation_date | date : format : timezone }}
+                    </div>
+
+                  </md-card-content>
+
+                </md-card>
+              </md-content>
+            </div>
+          </div>
+
+
+          <div layout="column" layout-align="space-around center" layout-fill class="project_section_item">
+            <div flex>
+              <md-content class="md-padding" layout="column">
+                <h2 class="md-title">Project Media</h2>
+              </md-content>
+            </div>
+
+            <div layout="column" layout-fill layout-align="start start">
+              <md-content layout-fill>
+                <md-list flex>
+                  <md-subheader class="md-no-sticky">Project Files</md-subheader>
+                  <md-list-item ng-repeat="file in vm.project.media.files">
+                    <div layout="row" layout-fill layout-padding>
+                      <div flex="33">
+                        <p>{{ file.title }}</p>
+                      </div>
+                      <div flex="33">
+                        <p>{{ file.file_type }}</p>
+                      </div>
+                      <div flex="33">
+                        <md-button class="md-raised md-primary" ng-href="{{ file.url }}" target="_blank">Download</md-button>
+                      </div>
+                    </div>
+                    <md-divider></md-divider>
+                  </md-list-item>
+                  <md-divider></md-divider>
+
+                  <md-subheader class="md-no-sticky">Project Images</md-subheader>
+                  <md-list-item ng-repeat="image in vm.project.media.images">
+                    <div layout="row" layout-fill layout-padding layout-align="center center">
+                      <div flex="66">
+                        <img ng-src="{{ image }}" class="project_media_image">
+                      </div>
+                      <div flex="33">
+                        <md-button class="md-raised md-primary" target="_blank" ng-href="{{ image }}">Download</md-button>
+                      </div>
+                    </div>
+                    <md-divider></md-divider>
+                  </md-list-item>
+                  <md-divider></md-divider>
+
+                  <md-subheader class="md-no-sticky">Project Videos</md-subheader>
+                  <md-list-item ng-repeat="vid in vm.project.media.videos">
+                    <div layout="row" layout-fill layout-padding layout-align="center center">
+                      <div flex="66">
+                        <youtube-video video-url="vm.getVideoLink(vid)"></youtube-video>
+                      </div>
+                      <div flex="33">
+                        <md-button class="md-raised md-primary" target="_blank" ng-href="{{ vid }}">Watch Video</md-button>
+                      </div>
+                    </div>
+                    <md-divider></md-divider>
+                  </md-list-item>
+                  <md-divider></md-divider>
+
+                  <md-subheader class="md-no-sticky">Project Links</md-subheader>
+                  <md-list-item ng-repeat="link in vm.project.media.links">
+                    <div layout="row" layout-fill layout-padding>
+                      <div flex="33">
+                        <p>{{ link.title }}</p>
+                      </div>
+                      <div flex="33">
+                        <p>{{ link.link_type }}</p>
+                      </div>
+                      <div flex="33">
+                        <md-button class="md-raised md-primary" target="_blank" ng-href="{{ link.url }}">Open Link</md-button>
+                      </div>
+                    </div>
+                    <md-divider></md-divider>
+                  </md-list-item>
+                  <md-divider></md-divider>
+
+                </md-list>
+              </md-content>
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+      <div flex="10"></div>
+
+    </div>
   </div>
-  <div class="pull-right"
-       data-ng-show="vm.project.isCurrentUserOwner">
-    <a class="btn btn-primary"
-       data-ui-sref="projects.edit({ projectId: vm.project._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" data-ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
+  <div class="footer">
+    <p>Footer</p>
   </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span data-ng-bind="vm.project.created | date:'mediumDate'"></span>
-      by
-      <span data-ng-if="vm.project.user"
-            data-ng-bind="vm.project.user.displayName"></span>
-      <span data-ng-if="!vm.project.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" data-ng-bind="vm.project.content"></p>
 </section>
