@@ -19,7 +19,8 @@ var ApplicationConfiguration = (function () {
     'ngclipboard',
     'treeControl',
     'toaster',
-    'ngMaterial'
+    'ngMaterial',
+    'youtube-embed'
   ];
 
   // Add a new vertical module

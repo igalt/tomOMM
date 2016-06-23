@@ -140,7 +140,7 @@ exports.projectByID = function(req, res, next, id) {
       .populate('team', userSelectFields)
       .populate('related_challenges')
       .populate('linked_projects')
-      .populate('reviews', userSelectFields)
+      .populate('reviews.user', userSelectFields)
       .populate('followers', userSelectFields)
       .exec(function (err, project) {
         if (err) {

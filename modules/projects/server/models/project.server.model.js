@@ -96,6 +96,10 @@ var ProjectSchema = new Schema({
       type: String,
       required: true,
       trim: true
+    },
+    creation_date: {
+      type: Date,
+      default: Date.now
     }
   }],
   status: [{

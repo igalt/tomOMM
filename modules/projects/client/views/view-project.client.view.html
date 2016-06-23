@@ -35,6 +35,12 @@
                     </md-chips>
                   </md-content>
                 </div>
+
+                <div>
+                  <md-content class="md-padding" layout="column">
+                    <p class="review_creation_date">started on {{vm.project.creation_date | date : format : timezone }}</p>
+                  </md-content>
+                </div>
               </div>
             </div>
           </div>
@@ -77,13 +83,13 @@
 
 
 
-          <div layout="column" layout-align="start stretch">
+          <div layout="column" layout-fill layout-align="center center" class="project_section_item">
             <div flex>
               <h2 class="md-title">Followers</h2>
             </div>
 
-            <div flex>
-              <md-virtual-repeat-container id="horizontal-container" md-orient-horizontal>
+            <div layout="row" layout-fill layout-align="center center">
+              <md-virtual-repeat-container layout-fill id="horizontal-container" md-orient-horizontal>
                 <div md-virtual-repeat="follower in vm.project.followers" class="repeated-item" flex>
                   <img ng-src="{{follower.profileImageURL}}?{{$index}}" class="md-avatar img-circle" alt="{{follower.displayName}}" />
                 </div>
@@ -92,6 +98,121 @@
           </div>
 
 
+          <div layout="column" layout-align="space-around center" class="project_section_item">
+            <div flex>
+              <md-content class="md-padding" layout="column">
+                <h2 class="md-title">Reviews</h2>
+              </md-content>
+            </div>
+
+            <div flex>
+              <md-content class="md-padding review_container" layout-align="start start">
+                <md-card class="review_item" ng-repeat="reviewItem in vm.project.reviews">
+                  <md-card-title>
+                    <md-card-title-text>
+                      <div layout="row" layout-align="start start" class="review_header">
+                        <img ng-src="{{reviewItem.user.profileImageURL}}?{{$index}}" class="md-avatar img-circle review_user_img" alt="{{reviewItem.user.displayName}}" />
+                        <h3 class="md-headline review-title">{{ reviewItem.user.displayName }}</h3>
+                      </div>
+                    </md-card-title-text>
+                  </md-card-title>
+
+                  <md-card-content>
+                    <div>
+                      <p>{{ reviewItem.review }}</p>
+                    </div>
+                    <div class="review_creation_date">
+                      created on {{ reviewItem.creation_date | date : format : timezone }}
+                    </div>
+
+                  </md-card-content>
+
+                </md-card>
+              </md-content>
+            </div>
+          </div>
+
+
+          <div layout="column" layout-align="space-around center" layout-fill class="project_section_item">
+            <div flex>
+              <md-content class="md-padding" layout="column">
+                <h2 class="md-title">Project Media</h2>
+              </md-content>
+            </div>
+
+            <div layout="column" layout-fill layout-align="start start">
+              <md-content layout-fill>
+                <md-list flex>
+                  <md-subheader class="md-no-sticky">Project Files</md-subheader>
+                  <md-list-item ng-repeat="file in vm.project.media.files">
+                    <div layout="row" layout-fill layout-padding>
+                      <div flex="33">
+                        <p>{{ file.title }}</p>
+                      </div>
+                      <div flex="33">
+                        <p>{{ file.file_type }}</p>
+                      </div>
+                      <div flex="33">
+                        <md-button class="md-raised md-primary">Download</md-button>
+                      </div>
+                    </div>
+                    <md-divider></md-divider>
+                  </md-list-item>
+                  <md-divider></md-divider>
+
+                  <md-subheader class="md-no-sticky">Project Images</md-subheader>
+                  <md-list-item ng-repeat="image in vm.project.media.images">
+                    <div layout="row" layout-fill layout-padding layout-align="center center">
+                      <div flex="66">
+                        <img ng-src="{{ image }}" class="project_media_image">
+                      </div>
+                      <div flex="33">
+                        <md-button class="md-raised md-primary">Download</md-button>
+                      </div>
+                    </div>
+                    <md-divider></md-divider>
+                  </md-list-item>
+                  <md-divider></md-divider>
+
+                  <md-subheader class="md-no-sticky">Project Videos</md-subheader>
+                  <md-list-item ng-repeat="vid in vm.project.media.videos">
+                    <div layout="row" layout-fill layout-padding layout-align="center center">
+                      <div flex="66">
+                        <youtube-video video-url="vm.getVideoLink(vid)"></youtube-video>
+                      </div>
+                      <div flex="33">
+                        <md-button class="md-raised md-primary">Watch Video</md-button>
+                      </div>
+                    </div>
+                    <md-divider></md-divider>
+                  </md-list-item>
+                  <md-divider></md-divider>
+
+                  <md-subheader class="md-no-sticky">Project Links</md-subheader>
+                  <md-list-item ng-repeat="link in vm.project.media.links">
+                    <div layout="row" layout-fill layout-padding>
+                      <div flex="33">
+                        <p>{{ link.title }}</p>
+                      </div>
+                      <div flex="33">
+                        <p>{{ link.link_type }}</p>
+                      </div>
+                      <div flex="33">
+                        <md-button class="md-raised md-primary">Open Link</md-button>
+                      </div>
+                    </div>
+                    <md-divider></md-divider>
+                  </md-list-item>
+                  <md-divider></md-divider>
+
+                </md-list>
+              </md-content>
+            </div>
+
+
+
+          </div>
+
 
         </div>
       </div>
@@ -99,5 +220,8 @@
       <div flex="10"></div>
 
     </div>
+  </div>
+  <div class="footer">
+    <p>Footer</p>
   </div>
 </section>
