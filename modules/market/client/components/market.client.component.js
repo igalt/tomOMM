@@ -10,11 +10,11 @@
         controllerAs: 'vm'
     });
 
-    marketComponent.$inject = ['Authentication', '$rootScope', '$window'];
+    marketComponent.$inject = ['Authentication', '$rootScope', '$window', '$state'];
 
-    function marketComponent (Authentication, $rootScope, $window) {
+    function marketComponent (Authentication, $rootScope, $window, $state) {
         var vm = this;
-
+        vm.searchTerm = '';
         // This provides Authentication context.
         vm.authentication = Authentication;
 
@@ -26,6 +26,12 @@
                     $window.open(toState.url, '_self');
                 }
             });
+
+        vm.goToResults = function(){
+            $state.go('market.searchResults', {
+                searchTerm: vm.searchTerm
+            });
+        };
 
     }
 })();

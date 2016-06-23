@@ -34,6 +34,7 @@ angular.module('market').run(['Menus',
       state: 'market.projectsBySkills',
       roles: ['admin', 'user', 'guest']
     });
+    
 
     Menus.addMenuItem('market', {
       title: 'About TOM',
