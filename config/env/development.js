@@ -100,5 +100,10 @@ module.exports = {
         roles: ['user', 'admin']
       }
     }
+  },
+  elasticSearchClient: {
+    host: process.env.ELASTIC_SEARCH_URI,
+    log: 'error'
   }
+
 };

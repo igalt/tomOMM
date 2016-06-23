@@ -5,6 +5,7 @@
  */
 var config = require('../config'),
   mongoose = require('./mongoose'),
+  elasticsearch = require('./elasticsearchaccessor'),
   express = require('./express'),
   chalk = require('chalk'),
   seed = require('./seed');
@@ -30,6 +31,8 @@ module.exports.init = function init(callback) {
     if (callback) callback(app, db, config);
 
   });
+
+  elasticsearch.init();
 };
 
 module.exports.start = function start(callback) {

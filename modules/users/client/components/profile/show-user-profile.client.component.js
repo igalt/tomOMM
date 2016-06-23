@@ -19,7 +19,7 @@
 
     var project = $http.get('/api/projects/576a448490a324c43c703db4', { cache: true });
 
-    console.log("project: "+project.data[0].title);
+    //console.log("project: "+project.data[0].title);
 
   }
 

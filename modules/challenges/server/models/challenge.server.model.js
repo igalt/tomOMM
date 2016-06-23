@@ -19,6 +19,14 @@ var ChallengeSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'makeathonId'
   },
+  title:{
+    type: String,
+    ref: 'title'
+  },
+  image:{
+    type: String,
+    default: 'modules/users/client/img/profile/default.png'
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
@@ -58,6 +66,7 @@ var ChallengeSchema = new Schema({
   //    default: false
   //  }
   //},
+  relatedProjects: [],
   needKnowerParticipate: {
     type: String,
     default: ''
