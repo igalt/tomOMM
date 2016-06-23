@@ -110,3 +110,38 @@
   height: 310px !important;
   border: 1px solid #c4c4c4;
 }
+
+.projects_section .itemsContainer {
+  float:left;
+  position:relative
+}
+
+.projects_section .itemsContainer:hover .user_preview{display:block}
+.user_preview{
+  color: #5f5964;
+  position : absolute;
+  display:none;
+  top:5%;
+  width:40px;
+  margin:0 auto;
+  z-index:100;
+  text-align: center;
+}
+
+.projects_section .project_team_user_link {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
+.projects_section .popup_container {
+  position: relative;
+}
+
+body.md-dialog-is-showing {
+  overflow: visible !important;
+}
+
+.projects_section .project_follower_tooltip {
+  position: relative;
+  display: inline;
+}
