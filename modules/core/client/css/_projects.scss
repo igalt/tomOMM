@@ -1,0 +1,112 @@
+.projects_section h1 {
+  font-family: Open Sans, Arial, sans-serif;
+  color: #1e7698 !important;
+  font-weight: normal;
+  font-size: 30px;
+  text-transform: uppercase;
+  line-height: 1.5em;
+}
+
+.projects_section .project_title {
+  font-family: "Aleo Regular","Palatino Linotype",Palatino !important;
+  color: #1e7698 !important;
+  font-size: 40px;
+  line-height:50px;
+  word-wrap: break-word;
+  text-align:left;
+  position: relative;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.projects_section .project_main_image {
+  height: 300px !important;
+  width: 400px !important;
+  visibility: visible;
+  border: 1px solid #888888;
+  display: block;
+  margin: -20px auto auto;
+}
+
+.projects_section .row_title {
+  text-align: center;
+  margin-right: 10px;
+}
+
+.projects_section #horizontal-container {
+  height: 80px;
+  width: 100%;
+  max-width: 270px;
+}
+
+.projects_section .repeated-item {
+  border-right: 1px solid #ddd;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 50px;
+  text-align: center;
+  width: 50px;
+  margin: 1px;
+}
+
+.projects_section md-virtual-repeat-container {
+  border: none;
+}
+
+.projects_section .img-circle {
+  border-radius: 50%;
+}
+
+.projects_section .review_container {
+  padding-top: 10px!important;
+}
+
+.projects_section .review_item {
+  background-color: whitesmoke;
+}
+
+.projects_section .review_header {
+  vertical-align: middle;
+}
+
+.projects_section .review-title {
+  font-size: 24px;
+  font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue","Segoe UI",Helvetica,Arial,"Lucida Grande",sans-serif;
+  font-weight: 300;
+  margin-left: 20px;
+  vertical-align: middle;
+}
+
+.projects_section .review_creation_date {
+  text-align: right;
+  font-style: italic;
+  font-weight: bold;
+  color: #5f5964;
+}
+
+.projects_section .review_user_img {
+  height: 50px;
+  width: 50px;
+  vertical-align: middle;
+  margin-top: 10px;
+}
+
+.projects_section .project_media_image {
+  height: 400px;
+  width: 650px;
+  vertical-align: middle;
+  margin-top: 10px;
+  background-size: cover
+}
+
+.projects_section .project_section_item {
+  margin-top: 30px;
+}
+
+.projects_section .project_media_video {
+  width: 443px !important;
+  height: 310px !important;
+  border: 1px solid #c4c4c4;
+}

@@ -103,7 +103,7 @@ exports.delete = function(req, res) {
  * List of all Projects
  */
 exports.list = function(req, res) {
-  var userSelectFields = 'firstName lastName displayName email';
+  var userSelectFields = 'firstName lastName displayName email profileImageURL';
   Project.find()
       .sort('-creation_date')
       .populate('project_owner', userSelectFields)
@@ -133,14 +133,14 @@ exports.projectByID = function(req, res, next, id) {
     });
   }
 
-  var userSelectFields = 'firstName lastName displayName email';
+  var userSelectFields = 'firstName lastName displayName email profileImageURL';
 
   Project.findById(id)
       .populate('project_owner', userSelectFields)
       .populate('team', userSelectFields)
       .populate('related_challenges')
       .populate('linked_projects')
-      .populate('reviews', userSelectFields)
+      .populate('reviews.user', userSelectFields)
       .populate('followers', userSelectFields)
       .exec(function (err, project) {
         if (err) {
@@ -166,7 +166,7 @@ exports.quickViewByID = function(req, res, next, id) {
     });
   }
 
-  var userSelectFields = 'firstName lastName displayName email';
+  var userSelectFields = 'firstName lastName displayName email profileImageURL';
 
   Project.findById(id)
       .populate('project_owner', userSelectFields)

@@ -17,6 +17,11 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.getVideoLink = getVideoLink;
+
+    function getVideoLink(videoLink) {
+      return videoLink;
+    }
 
     // Remove existing Project
     function remove() {
@@ -50,4 +55,5 @@
       }
     }
   }
+
 })();
