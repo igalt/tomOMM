@@ -23,7 +23,7 @@
     "textAngular": "^1.5.0",
     "ngclipboard": "^1.1.1",
     "clipboard": "^1.5.10",
-    "angular-material": "^1.0.9",
+    "angular-material": "^1.1.0-RC5",
     "angular-aria": "^1.5.5",
     "angular-tree-control": "^0.2.25"
   },

@@ -55,16 +55,22 @@
             </div>
 
             <div flex>
-              <md-content class="md-padding" layout-xs="column" layout="row">
+              <md-content class="md-padding popup_container" layout-xs="column" layout="row">
                 <div flex-xs flex-gt-xs="35" layout="column" ng-repeat="teamMember in vm.project.team">
-                  <md-card>
-                    <img ng-src="{{teamMember.profileImageURL}}" class="md-card-image" alt="{{teamMember.displayName}}">
-                    <md-card-title>
-                      <md-card-title-text>
-                        <span >{{teamMember.displayName}}</span>
-                      </md-card-title-text>
-                    </md-card-title>
-                  </md-card>
+                  <a href ng-click="vm.showUserPreview($event, teamMember)" class="project_team_user_link">
+                    <md-card>
+                      <div class="itemsContainer">
+                        <img ng-src="{{teamMember.profileImageURL}}" class="md-card-image" alt="{{teamMember.displayName}}">
+                        <div class="user_preview"><i class="material-icons">search</i> </div>
+                      </div>
+
+                      <md-card-title>
+                        <md-card-title-text>
+                          <span >{{teamMember.displayName}}</span>
+                        </md-card-title-text>
+                      </md-card-title>
+                    </md-card>
+                  </a>
                 </div>
               </md-content>
             </div>
@@ -91,7 +97,14 @@
             <div layout="row" layout-fill layout-align="center center">
               <md-virtual-repeat-container layout-fill id="horizontal-container" md-orient-horizontal>
                 <div md-virtual-repeat="follower in vm.project.followers" class="repeated-item" flex>
-                  <img ng-src="{{follower.profileImageURL}}?{{$index}}" class="md-avatar img-circle" alt="{{follower.displayName}}" />
+                  <a href ng-click="vm.showUserPreview($event, follower)" class="project_team_user_link">
+                    <md-container style="overflow:visible">
+                      <img ng-src="{{follower.profileImageURL}}?{{$index}}" class="md-avatar img-circle" alt="{{follower.displayName}}" />
+                      <md-tooltip class="project_follower_tooltip">
+                        {{ follower.displayName }}
+                      </md-tooltip>
+                    </md-container>
+                  </a>
                 </div>
               </md-virtual-repeat-container>
             </div>
@@ -110,10 +123,12 @@
                 <md-card class="review_item" ng-repeat="reviewItem in vm.project.reviews">
                   <md-card-title>
                     <md-card-title-text>
-                      <div layout="row" layout-align="start start" class="review_header">
-                        <img ng-src="{{reviewItem.user.profileImageURL}}?{{$index}}" class="md-avatar img-circle review_user_img" alt="{{reviewItem.user.displayName}}" />
-                        <h3 class="md-headline review-title">{{ reviewItem.user.displayName }}</h3>
-                      </div>
+                      <a href ng-click="vm.showUserPreview($event, reviewItem.user)" class="project_team_user_link">
+                        <div layout="row" layout-align="start start" class="review_header">
+                          <img ng-src="{{reviewItem.user.profileImageURL}}?{{$index}}" class="md-avatar img-circle review_user_img" alt="{{reviewItem.user.displayName}}" />
+                          <h3 class="md-headline review-title">{{ reviewItem.user.displayName }}</h3>
+                        </div>
+                      </a>
                     </md-card-title-text>
                   </md-card-title>
 
