@@ -1,0 +1,47 @@
+.market-home-section {
+  width: 100%;
+  padding: 1em 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.featuredItems{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+}
+.quickView {
+cursor: pointer;
+display: block;
+width: 100% !important;
+position: relative;
+margin-bottom: 1em;
+
+  img {
+    max-height: 200px;
+    max-width: 200px;
+    width: 100% !important;
+  }
+
+  .quickViewText {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    padding-top: 10px;
+    height: 50px;
+    background-color: $color-bg-banner;
+    font-size: 2em;
+    color: $color-font-banner;
+    opacity: 0.6; /* transparency */
+    filter: alpha(opacity=60); /* IE transparency */
+  }
+}

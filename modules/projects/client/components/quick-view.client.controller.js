@@ -8,9 +8,9 @@
         controller: projectQuickViewComponent,
         controllerAs: 'vm'
     });
-    projectQuickViewComponent.$inject = ['$state', 'Authentication', 'MakeathonsUtils', 'CommonService', '$window'];
+    projectQuickViewComponent.$inject = ['$state'];
     
-    function projectQuickViewComponent ($state, Authentication, CommonService, $window) {
+    function projectQuickViewComponent ($state) {
         var vm = this;
     }
 })();
