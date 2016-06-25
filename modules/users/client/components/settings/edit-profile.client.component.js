@@ -19,9 +19,8 @@
     //$scope.completeProfile = isProfileComplete();
     $scope.isStateEditProfile = false;
     var allSkillTags;
-    getAllTags();
 
-    this.loadTags = filterTags;
+    this.loadTags = getAllTags(filterTags);
 
     //if ($scope.completeProfile){
     //  $('#editUserProfile').hide();
@@ -84,11 +83,12 @@
       return true;
     }
 
-    function getAllTags() {
-      return $http.get('/api/skillTags', { cache: true })
+    function getAllTags(callback) {
+      $http.get('/api/skillTags', { cache: true })
           .then(function(response) {
             allSkillTags = response.data[0].skills;
           });
+      callback();
     }
 
     function filterTags($query) {
