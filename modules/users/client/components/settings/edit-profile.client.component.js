@@ -13,14 +13,20 @@
 
   editProfileComponent.$inject = ['$scope', '$state', '$http', 'Users', 'Authentication', 'toaster'];
 
-  function editProfileComponent($scope, $state, $http, Users, Authentication, toaster) {
+  function editProfileComponent($scope, $state, $http, $query, Users, Authentication, toaster) {
 
     $scope.user = Authentication.user;
     //$scope.completeProfile = isProfileComplete();
     $scope.isStateEditProfile = false;
     var allSkillTags;
+    setInterval(function() {
+      if (!allSkillTags) {
+        getAllTags();
+      } else {
+        clearInterval();
+      }},1000);
 
-    this.loadTags = getAllTags(filterTags);
+    $scope.loadTags = filterTags($query);
 
     //if ($scope.completeProfile){
     //  $('#editUserProfile').hide();
@@ -83,12 +89,12 @@
       return true;
     }
 
-    function getAllTags(callback) {
+    function getAllTags() {
       $http.get('/api/skillTags', { cache: true })
           .then(function(response) {
+            console.log(response);
             allSkillTags = response.data[0].skills;
           });
-      setTimeout(callback(),500);
     }
 
     function filterTags($query) {

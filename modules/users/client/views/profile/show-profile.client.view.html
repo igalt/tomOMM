@@ -1,33 +1,111 @@
-<section class="">
-  <div class="personal-details-section content-area">
-    <h2>Personal Details</h2>
-    <p><strong class="red-color">Name:</strong> {{user.firstName + " " + user.lastName}}</p>
-    <p><strong class="red-color">Where do I live:</strong> {{user.address.city+", "+user.address.country}}</p>
-    <p><strong class="red-color">Occupation:</strong> {{user.occupation}}</p>
-  </div>
-  <div class="bio-section">
-    <h2>Biography</h2>
-    <p>{{user.description}}</p>
-  </div>
-  <div class="skills-section">
-    <h2>Skills</h2>
-    <div ng-repeat="skill in user.skills">
-      <span>{{skill.text}}</span>
+<div class="page-header"></div>
+<div class="row">
+  <nav class="col-sm-3 col-md-3">
+    <div class="user-image">
+      <img ng-src="{{user.profileImageURL}}" height="250px" width="250px"/>
+      <br class="clear"/>
     </div>
-  </div>
-  <div class="project-attended">
-    <h2>Projects</h2>
-    <div class="current-project">
-      <h3>Current Project</h3>
+    <div class="user-contacts">
+      <div class="labels blue">CONTACTS  </div>
+
+      <div class="content-area">
+        Send Message
+      </div>
     </div>
-    <div class="past-projects">
-      <h3>Past Projects</h3>
+  </nav>
+
+  <div class="col-sm-9 col-md-15 settings-view">
+    <div class="col-md-15">
+      <div class="match-image-height">
+
+        <div class="user-profile-header">
+          <h1>{{user.displayName}}</h1>
+        </div>
+        <div class="labels green">PERSONAL INFORMATION </div>
+        <div class="content-area">
+          <p><strong class="red-color">Where do I live:</strong> {{user.address.city+", "+user.address.country}}</p>
+          <p><strong class="red-color">Occupation:</strong> {{user.occupation}}</p>
+          <p><strong class="red-color">TOM community member since:</strong> {{user.created}}</p>
+        </div>
+      </div>
+
+      <div class="biography-area">
+        <div class="labels green">BIOGRAPHY </div>
+
+        <div class="content-area">
+          <p>{{user.description}}</p>
+        </div>
+      </div>
+      <div class="skills-area">
+        <div class="labels green">SKILLS </div>
+        <div class="content-area">
+          <span class="skills-labels label label-profile orange" ng-repeat="skill in user.skills">{{skill.text}}</span>
+        </div>
+      </div>
     </div>
+
+
+
+</div>
+
+</div>
+
+
+    <div class="row projects-row">
+
+      <div class="col-md-15">
+
+        <div class="labels blue">PROJECTS</div>
+
+
+
+
+
+      </div>
+
+      <div class="col-md-6" style="overflow: hidden; margin-bottom: 10px;">
+        <div ng-repeat="project in user.related_projects">
+          <a href="project.url">
+            <img style="height: 262px; margin: 0; padding: 0;" ng-src="project.mainImage" alt="project.description" class="profile-image" />
+            <p>{{project.description}}</p>
+            <p>Project owner: {{project.project_owner.displayName}}</p>
+          </a>
+        </div>
+
+
+       </div>
+
+
+
+
+
+
+
+
+
+    </div>
+<div class="row challenges-row">
+
+  <div class="col-md-15">
+
+    <div class="labels blue">CHALLENGES</div>
+
+
+
+
+
   </div>
 
+  <div class="col-md-6" style="overflow: hidden; margin-bottom: 10px;" onmouseover="$('#project_115').show()" onmouseout="$('#project_115').hide()">
+    <div ng-repeat="challenge in user.related_challenges">
+      <a href="project.url">
+        <img style="height: 262px; margin: 0; padding: 0;" ng-src="challenge.mainImage" alt="challenge.description" class="profile-image" />
+        <p>{{challenge.description}}</p>
+        <p>Project owner: {{challenge.user.displayName}}</p>
+      </a>
+    </div>
+    </div>
+</div>
 
-      <toaster-container toaster-options="{'position-class': 'toast-bottom-right'}">
-      </toaster-container>
 
 
-</section>
