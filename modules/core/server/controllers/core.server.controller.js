@@ -8,6 +8,7 @@ var path = require('path'),
   async = require('async'),
   nodemailer = require('nodemailer'),
   sparkPostTransport = require('nodemailer-smtp-transport'),
+  elasticsearchaccessor = require('../../../../config/lib/elasticsearchaccessor'),
   mongoose = require('mongoose'),
   User = mongoose.model('User');
 
@@ -22,6 +23,12 @@ exports.renderIndex = function (req, res) {
     user: req.user || null,
     includeHeader: true
   });
+};
+
+exports.getSearchResults = function(req,res) {
+  var results;
+  elasticsearchaccessor.searchAll("first").then(function(value) {console.log(results); results = value; });
+  return res.status(200).send({message: results});
 };
 
 /**

@@ -2,6 +2,7 @@
 
 var should = require('should'),
     request = require('supertest'),
+    angular = require('angular'),
     path = require('path');
 
 describe('SearchService tests', function() {

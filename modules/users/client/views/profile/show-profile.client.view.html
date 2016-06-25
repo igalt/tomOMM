@@ -1,3 +1,4 @@
+<section class="user-settings-section">
 <div class="page-header"></div>
 <div class="row">
   <nav class="col-sm-3 col-md-3">
@@ -25,7 +26,7 @@
         <div class="content-area">
           <p><strong class="red-color">Where do I live:</strong> {{user.address.city+", "+user.address.country}}</p>
           <p><strong class="red-color">Occupation:</strong> {{user.occupation}}</p>
-          <p><strong class="red-color">TOM community member since:</strong> {{user.created}}</p>
+          <p><strong class="red-color">TOM community member since:</strong> {{user.created | date: 'MM/dd/yyyy'}}</p>
         </div>
       </div>
 
@@ -64,11 +65,11 @@
       </div>
 
       <div class="col-md-6" style="overflow: hidden; margin-bottom: 10px;">
-        <div ng-repeat="project in user.related_projects">
-          <a href="project.url">
-            <img style="height: 262px; margin: 0; padding: 0;" ng-src="project.mainImage" alt="project.description" class="profile-image" />
-            <p>{{project.description}}</p>
-            <p>Project owner: {{project.project_owner.displayName}}</p>
+        <div>
+          <a href="projects/576a4652bba652a40f177d72">
+            <img style="height: 262px; margin: 0; padding: 0;" ng-src="modules/projects/client/img/buddy_xpress.jpg" alt="Buddy Xpress" class="profile-image" />
+            <p>Buddy Xpress</p>
+            <p>Project owner: Le Dinh An</p>
           </a>
         </div>
 
@@ -109,3 +110,4 @@
 
 
 
+</section>

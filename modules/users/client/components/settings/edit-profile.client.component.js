@@ -11,22 +11,15 @@
     controllerAs: 'vm'
   });
 
-  editProfileComponent.$inject = ['$scope', '$state', '$http', 'Users', 'Authentication', 'toaster'];
+  editProfileComponent.$inject = ['$scope', '$state', '$http', 'Users', 'Authentication', 'toaster','SkillTagService'];
 
-  function editProfileComponent($scope, $state, $http, $query, Users, Authentication, toaster) {
+  function editProfileComponent($scope, $state, $http, $query, Users, Authentication, SkillTagService, toaster) {
 
     $scope.user = Authentication.user;
     //$scope.completeProfile = isProfileComplete();
     $scope.isStateEditProfile = false;
-    var allSkillTags;
-    setInterval(function() {
-      if (!allSkillTags) {
-        getAllTags();
-      } else {
-        clearInterval();
-      }},1000);
 
-    $scope.loadTags = filterTags($query);
+    $scope.loadTags = SkillTagService.filterTags($query);
 
     //if ($scope.completeProfile){
     //  $('#editUserProfile').hide();
@@ -89,18 +82,5 @@
       return true;
     }
 
-    function getAllTags() {
-      $http.get('/api/skillTags', { cache: true })
-          .then(function(response) {
-            console.log(response);
-            allSkillTags = response.data[0].skills;
-          });
-    }
-
-    function filterTags($query) {
-      return allSkillTags.filter(function (skill) {
-        return skill.text.toLowerCase().indexOf($query.toLowerCase()) !== -1;
-      });
-    }
   }
 })();
