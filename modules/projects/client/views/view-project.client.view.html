@@ -58,7 +58,7 @@
               <md-content class="md-padding popup_container" layout-xs="column" layout="row">
                 <div flex-xs flex-gt-xs="35" layout="column" ng-repeat="teamMember in vm.project.team">
                   <a href ng-click="vm.showUserPreview($event, teamMember)" class="project_team_user_link">
-                    <md-card>
+                    <md-card class="team_card">
                       <div class="itemsContainer">
                         <img ng-src="{{teamMember.profileImageURL}}" class="md-card-image" alt="{{teamMember.displayName}}">
                         <div class="user_preview"><i class="material-icons">search</i> </div>
