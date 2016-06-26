@@ -10,6 +10,11 @@
   function routeConfig($stateProvider) {
     // Users state routing
     $stateProvider
+      .state('users', {
+          abstract: true,
+          url: '/users',
+          template: '<ui-view/>'
+      })
       .state('settings', {
         abstract: true,
         url: '/settings',
@@ -94,8 +99,28 @@
         templateUrl: 'modules/users/client/views/password/reset-password-success.client.view.html'
       })
       .state('password.reset.form', {
-        url: '/:token',
-        component: 'resetPasswordComponent'
-      });
+          url: '/:token',
+          component: 'resetPasswordComponent'
+      })
+      .state('users.view', {
+            url: '/:userId',
+            templateUrl: 'modules/users/client/views/profile/show-profile.client.view.html',
+              controller: 'showUserProfileComponent',
+              controllerAs: 'vm',
+              resolve: {
+                userResolve: getUser
+              },
+              data:{
+                pageTitle: 'Project {{ articleResolve.name }}'
+              }
+            });
+
+    getUser.$inject = ['$stateParams', 'UsersService'];
+
+    function getUser($stateParams, UsersService) {
+      return UsersService.get({
+        userId: $stateParams.userId
+      }).$promise;
+    }
   }
 })();

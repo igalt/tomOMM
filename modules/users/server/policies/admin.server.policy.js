@@ -21,6 +21,13 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/users/:userId',
       permissions: '*'
     }]
+  },
+  {
+    roles: ['user','guest'],
+    allows: [{
+      resources: '/api/users/:userId',
+      permissions: 'get'
+    }]
   }]);
 };
 

@@ -4,7 +4,7 @@
 
     app.component('marketSearchComponent', {
         templateUrl: 'modules/market/client/views/searchResults.client.view.html',
-        controller: marketSearchComponent ,
+        controller: marketSearchComponent,
         controllerAs: 'vm'
     });
 
@@ -21,6 +21,10 @@
             $state.go('market.searchResults',{
                 'searchTerm': vm.searchText
             });
+        }
+
+        function goToLogin() {
+            $state.go('market.login');
         }
 
     }

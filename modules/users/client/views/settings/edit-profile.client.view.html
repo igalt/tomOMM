@@ -47,10 +47,10 @@
                     ng-model="user.skills"
                     placeholder="at least one tag such as (programming workshop)"
                     required>
-          <auto-complete source="vm.loadTags($query)"
-                         min-length="1"
-                         debounce-delay="0">
-          </auto-complete>
+          <!--<auto-complete source="vm.loadTags($query)"-->
+                         <!--min-length="1"-->
+                         <!--debounce-delay="0">-->
+          <!--</auto-complete>-->
         </tags-input>
 
         <div ng-messages="vm.form.applicationForm.skillSet.$error" role="alert">

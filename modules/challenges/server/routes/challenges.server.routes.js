@@ -6,6 +6,7 @@
 var challengesPolicy = require('../policies/challenges.server.policy'),
   challenges = require('../controllers/challenges.server.controller'),
   path = require('path'),
+  projectDataRetrieval = require('../services/project-data-retrieval.server.service'),
   config = require(path.resolve('./config/config')),
   multer = require('multer');
 
@@ -29,8 +30,7 @@ module.exports = function(app) {
     .delete(challenges.delete);
 
   app.route('/api/challenges/quickview/:challengeId').get(function (req,res) {
-    console.log(req);
-    var responseObj = {"title": req.challenge.title,
+     var responseObj = {"title": req.challenge.title,
                        "image": req.challenge.profileImageURL,
                        "description": req.challenge.desc};
     res.json(responseObj);
@@ -45,7 +45,7 @@ module.exports = function(app) {
       }
     };
 
-    function getUserData(req,res,responseObj,callback) {
+    function getUserData(req,res,responseObj,callback,secondCallback) {
       http.get({
         host: 'localhost',
         port: 3000,
@@ -58,55 +58,40 @@ module.exports = function(app) {
           });
           response.on('end', function () {
             responseObj.created_by = JSON.parse(responseData);
-            callback(req,res,responseObj);
+            return callback(req,res,responseObj,secondCallback);
           });
         }
       });
 
     };
 
-    function getProjectsData(req,res,responseObj) {
+    function getProjectsData(req,res,responseObj,callback) {
       if (req.challenge.relatedProjects) {
+         console.log("here");
         req.challenge.relatedProjects.forEach(function (currentValue) {
-          http.get({
-            host: 'localhost',
-            port: 3000,
-            path: "/api/projects/" + currentValue
-          }, function (response) {
-            var responseData = '';
-            response.on('data', function (chunk) {
-              responseData += chunk;
-            });
-            response.on('end', function () {
-              if (! responseIsHtml(response)) {
-                var parsed = JSON.parse(responseData);
-                projectsDataArray.push({
-                  "title": parsed.title,
-                  "url": parsed.url,
-                  "creation_date": parsed.creation_date
-                });
-                console.log("88");
-              }
-            });
-            console.log("91");
+            console.log(currentValue);
+            var projectData = projectDataRetrieval.getProjectQuickView(currentValue);
+            projectsDataArray.push(projectData);
+            console.log(projectsDataArray);
           });
-        });
-        console.log("94");
-        responseObj.relatedProjects = projectsDataArray;
-        console.log(responseObj);
+          responseObj.relatedProjects = projectsDataArray;
       }
+      return callback(res, responseObj);
+    };
+
+    function sendResponse(res,responseObj) {
       res.json(responseObj);
     };
 
-    function getInitialData (req,res,callback,secondCallback) {
+    function getInitialData (req,res,callback,secondCallback,thirdCallback) {
       var responseObj = {"title": req.challenge.title,
         "image": req.challenge.profileImageURL,
         "description": req.challenge.desc,
         "creation_date": req.challenge.createdAt};
-      callback(req,res,responseObj,secondCallback);
+      return callback(req,res,responseObj,secondCallback,thirdCallback);
     };
 
-    getInitialData(req,res,getUserData,getProjectsData);
+    return getInitialData(req,res,getUserData,getProjectsData,sendResponse);
   });
 
   // Finish by binding the Challenge middleware

@@ -1,6 +1,6 @@
 <section class="market-home-section">
 
-  <div class="col-md-8">
+  <div class="row search-box">
     <div class="input-group" id="adv-search">
       <input type="text" class="form-control" ng-model="vm.searchTerm" placeholder="Search TOM by need, skills, people & projects">
       <div class="input-group-btn">
@@ -36,7 +36,14 @@
       </div>
     </div>
   </div>
-  <div>
-    Results for {{vm.searchTerm}} :
+
+  <div class="row">
+    <h3>Results for {{vm.searchTerm}} :</h3>
+    <div class="featuredItems">
+      <Project-Quick-View-Component-2></Project-Quick-View-Component-2>
+    </div>
+  </div>
+  <div class="row">
+    <h3><a ui-sref="authentication.signin">Click here if you did not find the result you were looking for.</a></h3>
   </div>
 </section>
